@@ -7,8 +7,8 @@ metadata:
   name: meterdb
 spec:
   ports:
-    - name: "27027"
-      port: 27027
+    - name: "27017"
+      port: 27017
       targetPort: 27017
   selector:
     apps: meterdb
