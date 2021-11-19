@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    apps: egat-p2p-meter-api
+  name: egat-p2p-meter-api
+spec:
+  ports:
+    - name: "4000"
+      port: 4000
+      targetPort: 4000
+      nodePort: 30002
+  selector:
+    apps: egat-p2p-meter-api

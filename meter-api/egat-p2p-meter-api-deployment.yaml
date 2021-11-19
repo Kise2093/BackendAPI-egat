@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    apps: egat-p2p-meter-api
+  name: egat-p2p-meter-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: egat-p2p-meter-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        apps: egat-p2p-meter-api
+    spec:
+      containers:
+        - env:
+            - name: APP_API_KEY
+              value: AIzaSyCqNmC7Pgce5a44iW8cW9HDXIFPxJDhPgQ
+            - name: APP_GEOCODING_URL
+              value: https://maps.googleapis.com/maps/api/geocode
+            - name: HOST
+              value: 0.0.0.0
+            - name: MONGO_INITDB_DATABASENAME
+              value: MeterDatabase
+            - name: MONGO_INITDB_HOST
+              value: meterdb
+            - name: MONGO_INITDB_PORT
+              value: "27017"
+            - name: PORT
+              value: "4000"
+          image: phwuts/egat-p2p-meter-api:0.0.1
+          name: egat-p2p-meter-api
+          ports:
+            - containerPort: 4000
+          resources: {}
+      restartPolicy: Always
