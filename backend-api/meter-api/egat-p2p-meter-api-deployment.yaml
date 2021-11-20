@@ -34,7 +34,7 @@ spec:
             - name: MONGO_INITDB_USERNAME
               value: "meteruser"
             - name: MONGO_INITDB_PASSWORD
-              value: P@ssw0rd
+              value: Passw0rd
           image: phwuts/egat-p2p-meter-api:0.0.2
           name: egat-p2p-meter-api
           ports:
