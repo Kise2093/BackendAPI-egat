@@ -31,6 +31,10 @@ spec:
               value: "27017"
             - name: PORT
               value: "4000"
+            - name: MONGO_INITDB_USERNAME
+              value: "meteruser"
+            - name: MONGO_INITDB_PASSWORD
+              value: P@ssw0rd
           image: phwuts/egat-p2p-meter-api:0.0.1
           name: egat-p2p-meter-api
           ports:
