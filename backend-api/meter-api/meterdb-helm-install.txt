@@ -1,0 +1,3 @@
+helm upgrade --install -n erc-p2p meterdb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rd --set mongodbUsername=meteruser --set mongodbPassword=Passw0rd --set mongodbDatabase=MeterDatabase
+
+helm uninstall -n erc-p2p meterdb stable/mongodb

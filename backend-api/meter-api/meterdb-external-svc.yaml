@@ -4,7 +4,7 @@ metadata:
   name: meterdb-external-svc
   namespace: kafka-connect
 spec:
-  externalName: meterdb.erc-p2p.svc.cluster.local
+  externalName: meterdb-mongodb.erc-p2p.svc.cluster.local
   internalTrafficPolicy: Cluster
   sessionAffinity: None
   type: ExternalName
