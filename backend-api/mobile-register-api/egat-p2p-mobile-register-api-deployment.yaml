@@ -43,7 +43,7 @@ spec:
             - name: MONGO_SESSIONDB_HOST
               value: session-mongodb
             - name: MONGO_SESSIONDB_PASSWORD
-              value: Passw0rdIKP
+              value: Passw0rdEGAT
             - name: MONGO_SESSIONDB_PORT
               value: "27017"
             - name: MONGO_SESSIONDB_USERNAME
@@ -53,7 +53,7 @@ spec:
             - name: MONGO_USERDB_HOST
               value: userprofile-mongodb
             - name: MONGO_USERDB_PASSWORD
-              value: Passw0rdIKP
+              value: Passw0rdEGAT
             - name: MONGO_USERDB_PORT
               value: "27017"
             - name: MONGO_USERDB_USERNAME
