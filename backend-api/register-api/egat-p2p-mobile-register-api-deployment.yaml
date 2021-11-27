@@ -2,18 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    apps: egat-p2p-register-api
-  name: egat-p2p-register-api
+    apps: egat-p2p-mobile-register-api
+  name: egat-p2p-mobile-register-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      apps: egat-p2p-register-api
+      apps: egat-p2p-mobile-register-api
   strategy: {}
   template:
     metadata:
       labels:
-        apps: egat-p2p-register-api
+        io.kompose.network/egat-p2p: "true"
+        apps: egat-p2p-mobile-register-api
     spec:
       containers:
         - env:
@@ -41,23 +42,32 @@ spec:
               value: SessionDatabase
             - name: MONGO_SESSIONDB_HOST
               value: sessiondb
+            - name: MONGO_SESSIONDB_PASSWORD
+              value: Passw0rdIKP
             - name: MONGO_SESSIONDB_PORT
               value: "27017"
+            - name: MONGO_SESSIONDB_USERNAME
+              value: user
             - name: MONGO_USERDB_DATABASENAME
               value: UserDatabase
             - name: MONGO_USERDB_HOST
               value: userdb
+            - name: MONGO_USERDB_PASSWORD
+              value: Passw0rdIKP
             - name: MONGO_USERDB_PORT
               value: "27017"
+            - name: MONGO_USERDB_USERNAME
+              value: user
             - name: PORT
               value: "3000"
             - name: URL_METER_API
-              value: https://egat-p2p-meter-api.di.iknowplus.co.th
+              value: egat-p2p-meter-api
             - name: URL_OTP_GATEWAY_API
-              value: https://egat-p2p-otp-gateway-api.di.iknowplus.co.th
-          image: phwuts/egat-p2p-register-api:0.0.1
-          name: egat-p2p-register-api
+              value: egat-p2p-otp-gateway-api
+          image: phwuts/egat-p2p-mobile-register-api:0.0.1
+          name: egat-p2p-mobile-register-api
           ports:
             - containerPort: 3000
           resources: {}
       restartPolicy: Always
+
