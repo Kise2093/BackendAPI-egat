@@ -24,17 +24,17 @@ spec:
             - name: HOST
               value: 0.0.0.0
             - name: MONGO_INITDB_DATABASENAME
-              value: MeterDatabase
+              value: MasterDataDatabase
             - name: MONGO_INITDB_HOST
-              value: meterdb-mongodb
+              value: masterdata-mongodb
             - name: MONGO_INITDB_PORT
               value: "27017"
             - name: PORT
               value: "4000"
             - name: MONGO_INITDB_USERNAME
-              value: "meteruser"
+              value: "user"
             - name: MONGO_INITDB_PASSWORD
-              value: Passw0rd
+              value: Passw0rdEGAT
           image: phwuts/egat-p2p-meter-api:0.0.2
           name: egat-p2p-meter-api
           ports:
