@@ -1,28 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert --chart -f docker-compose-meterapi.yaml
-    kompose.version: 1.25.0 (a70f80cc)
-  creationTimestamp: null
   labels:
-    io.kompose.service: egat-p2p-meter-api
+    apps: egat-p2p-meter-api
   name: egat-p2p-meter-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: egat-p2p-meter-api
+      apps: egat-p2p-meter-api
   strategy: {}
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert --chart -f docker-compose-meterapi.yaml
-        kompose.version: 1.25.0 (a70f80cc)
-      creationTimestamp: null
       labels:
-        io.kompose.network/egat-p2p: "true"
-        io.kompose.service: egat-p2p-meter-api
+        apps: egat-p2p-meter-api
     spec:
       containers:
         - env:
@@ -50,4 +41,3 @@ spec:
             - containerPort: 4000
           resources: {}
       restartPolicy: Always
-status: {}
