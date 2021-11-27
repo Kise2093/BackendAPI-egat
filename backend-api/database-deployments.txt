@@ -1,6 +1,12 @@
-helm upgrade --install -n erc-p2p masterdata-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=MasterDataDatabase
+helm upgrade --install -n erc-p2p masterdata-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=MasterDataDatabase --set persistence.size=2Gi
 
-helm upgrade --install -n erc-p2p energyforecast-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=EnergyForcastDatabase
+helm upgrade --install -n erc-p2p userprofile-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=UserDatabase --set persistence.size=2Gi
+
+helm upgrade --install -n erc-p2p session-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=SessionDatabase --set persistence.size=2Gi
+
+
+
+helm upgrade --install -n erc-p2p energyforecast-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=EnergyForecastDatabase
 
 helm upgrade --install -n erc-p2p energyactual-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=EnergyActualDatabase
 

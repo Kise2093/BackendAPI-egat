@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    apps: egat-p2p-mobile-login-api
+  name: egat-p2p-mobile-login-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: egat-p2p-mobile-login-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        apps: egat-p2p-mobile-login-api
+    spec:
+      containers:
+        - env:
+            - name: COOLDOWN_OTP_IN_SECOND
+              value: "60"
+            - name: HOST
+              value: 0.0.0.0
+            - name: KEYCLOAK_BASE_URL
+              value: https://keycloak.iknowplus.co.th/auth
+            - name: KEYCLOAK_OPENID_ADMIN_PASSWORD
+              value: P@ssw0rdIKP
+            - name: KEYCLOAK_OPENID_ADMIN_USERNAME
+              value: admin
+            - name: KEYCLOAK_OPENID_BASE_URL
+              value: https://keycloak.iknowplus.co.th/auth/realms/egat
+            - name: KEYCLOAK_OPENID_CLIENT_ID
+              value: egat-p2p-trading
+            - name: KEYCLOAK_OPENID_EGAT_PASSWORD
+              value: initPasswordEGAT
+            - name: KEYCLOAK_OPENID_EGAT_USERNAME
+              value: egat-p2p-user
+            - name: KEYCLOAK_OPENID_GRANT_TYPE
+              value: password
+            - name: KEYCLOAK_REALM_NAME
+              value: egat
+            - name: LIMIT_SESSION_EXPIRE_IN_MINUTE
+              value: "10"
+            - name: MONGO_SESSIONDB_DATABASENAME
+              value: SessionDatabase
+            - name: MONGO_SESSIONDB_HOST
+              value: session-mongodb
+            - name: MONGO_SESSIONDB_PASSWORD
+              value: Passw0rdEGAT
+            - name: MONGO_SESSIONDB_PORT
+              value: "27017"
+            - name: MONGO_SESSIONDB_USERNAME
+              value: user
+            - name: MONGO_USERDB_DATABASENAME
+              value: UserDatabase
+            - name: MONGO_USERDB_HOST
+              value: userprofile-mongodb
+            - name: MONGO_USERDB_PASSWORD
+              value: Passw0rdEGAT
+            - name: MONGO_USERDB_PORT
+              value: "27017"
+            - name: MONGO_USERDB_USERNAME
+              value: user
+            - name: PORT
+              value: "3001"
+            - name: URL_OTP_GATEWAY_API
+              value: egat-p2p-otp-gateway-api
+          image: phwuts/egat-p2p-mobile-login-api:0.0.1
+          name: egat-p2p-mobile-login-api
+          ports:
+            - containerPort: 3001
+          resources: {}
+      restartPolicy: Always
