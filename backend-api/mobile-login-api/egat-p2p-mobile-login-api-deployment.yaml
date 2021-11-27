@@ -22,13 +22,13 @@ spec:
             - name: HOST
               value: 0.0.0.0
             - name: KEYCLOAK_BASE_URL
-              value: https://keycloak.iknowplus.co.th/auth
+              value: http://10.40.58.157:32001/auth
             - name: KEYCLOAK_OPENID_ADMIN_PASSWORD
               value: P@ssw0rdIKP
             - name: KEYCLOAK_OPENID_ADMIN_USERNAME
               value: admin
             - name: KEYCLOAK_OPENID_BASE_URL
-              value: https://keycloak.iknowplus.co.th/auth/realms/egat
+              value: http://10.40.58.157:32001/auth/realms/egat
             - name: KEYCLOAK_OPENID_CLIENT_ID
               value: egat-p2p-trading
             - name: KEYCLOAK_OPENID_EGAT_PASSWORD

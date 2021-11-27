@@ -1,19 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    kompose.cmd: kompose convert --chart -f docker-compose-meterapi.yaml
+    kompose.version: 1.25.0 (a70f80cc)
+  creationTimestamp: null
   labels:
-    apps: egat-p2p-meter-api
+    io.kompose.service: egat-p2p-meter-api
   name: egat-p2p-meter-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      apps: egat-p2p-meter-api
+      io.kompose.service: egat-p2p-meter-api
   strategy: {}
   template:
     metadata:
+      annotations:
+        kompose.cmd: kompose convert --chart -f docker-compose-meterapi.yaml
+        kompose.version: 1.25.0 (a70f80cc)
+      creationTimestamp: null
       labels:
-        apps: egat-p2p-meter-api
+        io.kompose.network/egat-p2p: "true"
+        io.kompose.service: egat-p2p-meter-api
     spec:
       containers:
         - env:
@@ -27,17 +36,18 @@ spec:
               value: MasterDataDatabase
             - name: MONGO_INITDB_HOST
               value: masterdata-mongodb
-            - name: MONGO_INITDB_PORT
-              value: "27017"
-            - name: PORT
-              value: "4000"
-            - name: MONGO_INITDB_USERNAME
-              value: "user"
             - name: MONGO_INITDB_PASSWORD
               value: Passw0rdEGAT
-          image: phwuts/egat-p2p-meter-api:0.0.2
+            - name: MONGO_INITDB_PORT
+              value: "27017"
+            - name: MONGO_INITDB_USERNAME
+              value: user
+            - name: PORT
+              value: "4000"
+          image: phwuts/egat-p2p-meter-api:0.0.3
           name: egat-p2p-meter-api
           ports:
             - containerPort: 4000
           resources: {}
       restartPolicy: Always
+status: {}

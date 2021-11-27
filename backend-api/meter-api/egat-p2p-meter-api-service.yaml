@@ -11,3 +11,4 @@ spec:
       targetPort: 4000
   selector:
     apps: egat-p2p-meter-api
+
