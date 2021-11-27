@@ -13,7 +13,6 @@ spec:
   template:
     metadata:
       labels:
-        io.kompose.network/egat-p2p: "true"
         apps: egat-p2p-mobile-register-api
     spec:
       containers:
