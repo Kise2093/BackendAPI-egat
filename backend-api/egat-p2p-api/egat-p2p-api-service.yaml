@@ -9,5 +9,7 @@ spec:
     - name: "4000"
       port: 4000
       targetPort: 30000
+      nodePort: 30003
+  type: NodePort
   selector:
     apps: egat-p2p-api

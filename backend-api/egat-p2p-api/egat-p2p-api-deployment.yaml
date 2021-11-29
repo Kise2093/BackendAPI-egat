@@ -28,7 +28,7 @@ spec:
               value: http://egat-p2p-mobile-register-api
             - name: PORT
               value: "30000"
-          image: phwuts/egat-p2p-api:0.0.1
+          image: phwuts/egat-p2p-api:0.0.2
           name: egat-p2p-api
           resources: {}
       restartPolicy: Always
