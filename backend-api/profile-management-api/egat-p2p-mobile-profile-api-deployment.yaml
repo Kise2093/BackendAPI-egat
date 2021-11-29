@@ -20,9 +20,9 @@ spec:
             - name: HOST
               value: 0.0.0.0
             - name: KEYCLOAK_BASE_URL
-              value: http://10.40.58.157:32001/auth/
+              value: http://keycloak-headless/auth
             - name: KEYCLOAK_OPENID_BASE_URL
-              value: http://10.40.58.157:32001/auth/realms/egat
+              value: http://keycloak-headless/auth/realms/egat
             - name: KEYCLOAK_OPENID_CLIENT_ID
               value: egat-p2p-trading
             - name: KEYCLOAK_OPENID_GRANT_TYPE
