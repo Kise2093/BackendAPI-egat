@@ -64,7 +64,7 @@ spec:
             - name: PORT
               value: "3001"
             - name: URL_OTP_GATEWAY_API
-              value: egat-p2p-otp-gateway-api
+              value: http://egat-p2p-otp-gateway-api
           image: phwuts/egat-p2p-mobile-login-api:0.0.1
           name: egat-p2p-mobile-login-api
           ports:

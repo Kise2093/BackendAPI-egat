@@ -60,9 +60,9 @@ spec:
             - name: PORT
               value: "3000"
             - name: URL_METER_API
-              value: egat-p2p-meter-api
+              value: http://egat-p2p-meter-api
             - name: URL_OTP_GATEWAY_API
-              value: egat-p2p-otp-gateway-api
+              value: http://egat-p2p-otp-gateway-api
           image: phwuts/egat-p2p-mobile-register-api:0.0.1
           name: egat-p2p-mobile-register-api
           ports:

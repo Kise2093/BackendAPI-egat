@@ -21,11 +21,11 @@ spec:
             - name: KEYCLOAK_OPENID_BASE_URL
               value: http://keycloak-headless/auth/realms/egat
             - name: MOBILE_LOGIN_API_URL
-              value: egat-p2p-mobile-login-api
+              value: http://egat-p2p-mobile-login-api
             - name: MOBILE_PROFILE_API_URL
-              value: egat-p2p-mobile-profile-api
+              value: http://egat-p2p-mobile-profile-api
             - name: MOBILE_REGISTER_API_URL
-              value: egat-p2p-mobile-register-api
+              value: http://egat-p2p-mobile-register-api
             - name: PORT
               value: "30000"
           image: phwuts/egat-p2p-api:0.0.1
