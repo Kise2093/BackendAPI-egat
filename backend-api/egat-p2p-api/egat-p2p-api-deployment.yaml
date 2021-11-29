@@ -19,7 +19,7 @@ spec:
             - name: HOST
               value: 0.0.0.0
             - name: KEYCLOAK_OPENID_BASE_URL
-              value: http://keycloak-headless/auth/realms/egat
+              value: http://keycloak/auth/realms/egat
             - name: MOBILE_LOGIN_API_URL
               value: http://egat-p2p-mobile-login-api
             - name: MOBILE_PROFILE_API_URL
