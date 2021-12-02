@@ -1,1 +1,1 @@
-kubectl -n erc-p2p apply -f backend-api/egat-p2p-api/ -f backend-api/meter-api/ -f backend-api/mobile-login-api/ -f backend-api/mobile-register/api -f backend-api/otp-gateway-api -f backend-api/profile-management-api
+kubectl -n erc-p2p apply -f backend-api/egat-p2p-api/ -f backend-api/meter-api/ -f backend-api/mobile-login-api/ -f backend-api/mobile-register-api -f backend-api/otp-gateway-api -f backend-api/profile-management-api
