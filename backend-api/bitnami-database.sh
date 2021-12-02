@@ -1,23 +1,3 @@
-helm upgrade --install -n erc-p2p masterdata-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=MasterDataDatabase --set persistence.size=2Gi
-
-helm upgrade --install -n erc-p2p otp-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=OtpDatabase --set persistence.size=2Gi
-
-helm upgrade --install -n erc-p2p session-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=SessionDatabase --set persistence.size=2Gi
-
-helm upgrade --install -n erc-p2p userprofile-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=UserDatabase --set persistence.size=2Gi
-
-helm upgrade --install -n erc-p2p reference-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=ReferenceDatabase --set persistence.size=2Gi
-
-helm upgrade --install -n erc-p2p pool-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=PoolDatabase --set persistence.size=2Gi
-
-helm upgrade --install -n erc-p2p bilateral-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=BilateralDatabase --set persistence.size=2Gi
-
-helm upgrade --install -n erc-p2p trade-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=TradeDatabase --set persistence.size=2Gi
-
-helm upgrade --install -n erc-p2p job-mongodb stable/mongodb --set replicaSet.enabled=true --set mongodbRootPassword=Passw0rdEGAT --set mongodbUsername=user --set mongodbPassword=Passw0rdEGAT --set mongodbDatabase=JobDatabase --set persistence.size=4Gi
-
-#bitnami
-
 helm upgrade --install -n erc-p2p masterdata-mongodb bitnami/mongodb --set architecture=replicaset --set auth.rootPassword=Passw0rdEGAT --set auth.usernames[0]=user --set auth.passwords[0]=Passw0rdEGAT --set auth.databases[0]=MasterDataDatabase --set persistence.size=2Gi --set externalAccess.enabled=true --set externalAccess.service.type=NodePort --set externalAccess.service.nodePorts[0]=31111 --set externalAccess.service.nodePorts[1]=31112
 
 helm upgrade --install -n erc-p2p otp-mongodb bitnami/mongodb --set architecture=replicaset --set auth.rootPassword=Passw0rdEGAT --set auth.usernames[0]=user --set auth.passwords[0]=Passw0rdEGAT --set auth.databases[0]=OtpDataDatabase --set persistence.size=2Gi --set externalAccess.enabled=true --set externalAccess.service.type=NodePort --set externalAccess.service.nodePorts[0]=31113 --set externalAccess.service.nodePorts[1]=31114

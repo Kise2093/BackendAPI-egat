@@ -40,7 +40,7 @@ spec:
             - name: MONGO_SESSIONDB_DATABASENAME
               value: SessionDatabase
             - name: MONGO_SESSIONDB_HOST
-              value: session-mongodb
+              value: session-mongodb-0
             - name: MONGO_SESSIONDB_PASSWORD
               value: Passw0rdEGAT
             - name: MONGO_SESSIONDB_PORT
@@ -50,7 +50,7 @@ spec:
             - name: MONGO_USERDB_DATABASENAME
               value: UserDatabase
             - name: MONGO_USERDB_HOST
-              value: userprofile-mongodb
+              value: userprofile-mongodb-0
             - name: MONGO_USERDB_PASSWORD
               value: Passw0rdEGAT
             - name: MONGO_USERDB_PORT
