@@ -26,7 +26,7 @@ spec:
             - name: MONGO_INITDB_DATABASENAME
               value: MasterDataDatabase
             - name: MONGO_INITDB_HOST
-              value: masterdata-mongodb-0
+              value: masterdata-mongodb-0-external
             - name: MONGO_INITDB_PASSWORD
               value: Passw0rdEGAT
             - name: MONGO_INITDB_PORT

@@ -23,7 +23,7 @@ spec:
             - name: MONGO_INITDB_DATABASENAME
               value: OtpDatabase
             - name: MONGO_INITDB_HOST
-              value: otp-mongodb-0
+              value: otp-mongodb-0-external
             - name: MONGO_INITDB_PASSWORD
               value: Passw0rdEGAT
             - name: MONGO_INITDB_PORT
