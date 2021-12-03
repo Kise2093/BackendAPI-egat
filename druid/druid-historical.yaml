@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    meta.helm.sh/release-name: druid
+    meta.helm.sh/release-namespace: druid
+  labels:
+    app: druid
+    app.kubernetes.io/managed-by: Helm
+    chart: druid-0.2.18
+    component: historical
+    heritage: Helm
+    release: druid
+  name: druid-historical
+  namespace: druid
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: druid
+      component: historical
+      release: druid
+  template:
+    metadata:
+      labels:
+        app: druid
+        component: historical
+        release: druid
+    spec:
+      containers:
+      - args:
+        - historical
+        env:
+        - name: DRUID_MAXDIRECTMEMORYSIZE
+          value: 400m
+        - name: DRUID_XMS
+          value: 512m
+        - name: DRUID_XMX
+          value: 512m
+        - name: druid_processing_buffer_sizeBytes
+          value: "50000000"
+        - name: druid_processing_numMergeBuffers
+          value: "2"
+        - name: druid_processing_numThreads
+          value: "1"
+        envFrom:
+        - configMapRef:
+            name: druid
+        image: apache/druid:0.19.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /status/health
+            port: 8083
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: druid
+        ports:
+        - containerPort: 8083
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /status/health
+            port: 8083
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/druid/var/druid/
+          name: data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: data

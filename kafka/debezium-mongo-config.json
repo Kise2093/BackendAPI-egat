@@ -1,0 +1,13 @@
+{
+"name": "debezium-mongo-source",
+"config": {
+  "connector.class": "io.debezium.connector.mongodb.MongoDbConnector",
+  "mongodb.hosts": "rs0/mongodb-ext:27017",
+  "mongodb.user": "order",
+  "mongodb.password": "P@ssw0rd",
+  "mongodb.name": "fullfillment",
+  "mongodb.authsource": "admin",
+  "database.whitelist": "inventory",
+  "tasks.max": "5"
+    }
+}

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    apps: egat-p2p-webadmin
+  name: egat-p2p-webadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: egat-p2p-webadmin
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        apps: egat-p2p-webadmin
+    spec:
+      containers:
+        - image: mrworapol/egat-p2p-webadmin:0.0.1
+          name: egat-p2p-webadmin
+          ports:
+            - containerPort: 3004
+          resources: {}
+          stdin: true
+          volumeMounts:
+            - mountPath: /usr/src/app
+              name: egat-p2p-webadmin-claim0
+            - mountPath: /usr/src/app/node_modules
+              name: egat-p2p-webadmin-claim1
+      restartPolicy: Always
+      volumes:
+        - name: egat-p2p-webadmin-claim0
+          persistentVolumeClaim:
+            claimName: egat-p2p-webadmin-claim0
+        - name: egat-p2p-webadmin-claim1
+          persistentVolumeClaim:
+            claimName: egat-p2p-webadmin-claim1

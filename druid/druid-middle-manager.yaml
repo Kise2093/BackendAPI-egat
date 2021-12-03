@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: druid
+    app.kubernetes.io/managed-by: Helm
+    chart: druid-0.2.18
+    component: middle-manager
+    heritage: Helm
+    release: druid
+  name: druid-middle-manager
+  namespace: druid
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: druid
+      component: middle-manager
+      release: druid
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: druid
+        component: middle-manager
+        release: druid
+    spec:
+      containers:
+      - args:
+        - middleManager
+        env:
+        - name: DRUID_XMS
+          value: 64m
+        - name: DRUID_XMX
+          value: 64m
+        - name: druid_indexer_fork_property_druid_processing_buffer_sizeBytes
+          value: "25000000"
+        - name: druid_indexer_runner_javaOptsArray
+          value: '["-server", "-Xms256m", "-Xmx256m", "-XX:MaxDirectMemorySize=300m",
+            "-Duser.timezone=UTC", "-Dfile.encoding=UTF-8", "-XX:+ExitOnOutOfMemoryError",
+            "-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager"]'
+        envFrom:
+        - configMapRef:
+            name: druid
+        image: apache/druid:0.19.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /status/health
+            port: 8091
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: druid
+        ports:
+        - containerPort: 8091
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /status/health
+            port: 8091
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/druid/var/druid/
+          name: data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: data

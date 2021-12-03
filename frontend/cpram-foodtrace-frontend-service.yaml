@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    apps: egat-p2p-webadmin
+  name: egat-p2p-webadmin
+spec:
+  ports:
+    - name: "3004"
+      port: 3004
+      targetPort: 3004
+  selector:
+    apps: egat-p2p-webadmin
