@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    apps: egat-p2p-web-admin-login-api
+  name: egat-p2p-web-admin-login-api
+spec:
+  ports:
+    - name: "3003"
+      port: 3003
+      targetPort: 3003
+  selector:
+    apps: egat-p2p-web-admin-login-api
+

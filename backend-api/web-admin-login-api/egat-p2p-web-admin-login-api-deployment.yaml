@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    apps: egat-p2p-web-admin-login-api
+  name: egat-p2p-web-admin-login-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: egat-p2p-web-admin-login-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        apps: egat-p2p-web-admin-login-api
+    spec:
+      containers:
+        - env:
+            - name: HOST
+              value: 0.0.0.0
+            - name: KEYCLOAK_BASE_URL
+              value: http://keycloak/auth
+            - name: KEYCLOAK_OPENID_ADMIN_PASSWORD
+              value: P@ssw0rdIKP
+            - name: KEYCLOAK_OPENID_ADMIN_USERNAME
+              value: admin
+            - name: KEYCLOAK_OPENID_BASE_URL
+              value: http://keycloak/auth/realms/egat
+            - name: KEYCLOAK_OPENID_CLIENT_ID
+              value: egat-p2p-trading
+            - name: KEYCLOAK_OPENID_EGAT_PASSWORD
+              value: initPasswordEGAT
+            - name: KEYCLOAK_OPENID_EGAT_USERNAME
+              value: egat-p2p-user
+            - name: KEYCLOAK_OPENID_GRANT_TYPE
+              value: password
+            - name: KEYCLOAK_REALM_NAME
+              value: egat
+            - name: PORT
+              value: "3003"
+          image: phwuts/egat-p2p-web-admin-login-api:0.0.1
+          name: egat-p2p-web-admin-login-api
+          ports:
+            - containerPort: 3003
+          resources: {}
+      restartPolicy: Always

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    apps: egat-p2p-web-admin-user-management-api
+  name: egat-p2p-web-admin-user-management-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: egat-p2p-web-admin-user-management-api
+  template:
+    metadata:
+      labels:
+        apps: egat-p2p-web-admin-user-management-api
+    spec:
+      containers:
+        - env:
+            - name: HOST
+              value: 0.0.0.0
+            - name: KEYCLOAK_BASE_URL
+              value: http://keycloak/auth
+            - name: KEYCLOAK_OPENID_BASE_URL
+              value: http://keycloak/auth/realms/egat
+            - name: KEYCLOAK_OPENID_CLIENT_ID
+              value: egat-p2p-trading
+            - name: KEYCLOAK_OPENID_GRANT_TYPE
+              value: password
+            - name: KEYCLOAK_OPENID_PASSWORD
+              value: P@ssw0rdIKP
+            - name: KEYCLOAK_OPENID_USERNAME
+              value: admin
+            - name: KEYCLOAK_REALM_NAME
+              value: egat
+            - name: MONGO_INITDB_DATABASENAME
+              value: MasterDataDatabase
+            - name: MONGO_INITDB_HOST
+              value: masterdata-mongodb-0-external
+            - name: MONGO_INITDB_PASSWORD
+              value: Passw0rdEGAT
+            - name: MONGO_INITDB_PORT
+              value: "27017"
+            - name: MONGO_INITDB_USERNAME
+              value: user
+            - name: PORT
+              value: "3004"
+            - name: URL_METER_API
+              value: http://egat-p2p-meter-api
+          image: phwuts/egat-p2p-web-admin-user-management-api:0.0.1
+          name: egat-p2p-web-admin-user-management-api
+          ports:
+            - containerPort: 3004
+          resources: {}
+      restartPolicy: Always
