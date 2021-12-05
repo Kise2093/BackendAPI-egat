@@ -12,4 +12,3 @@ spec:
   type: NodePort
   selector:
     apps: egat-p2p-meter-api
-

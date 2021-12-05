@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: egat-refdata-chaincode
+  namespace: hyperledger
+spec:
+  ports:
+  - name: grpc
+    port: 3000
+    targetPort: 3000
+  selector:
+    app: egat-refdata-chaincode
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: egat-refdata-chaincode
+  name: egat-refdata-chaincode
+  namespace: hyperledger
+spec:
+  selector:
+    matchLabels:
+      app: egat-refdata-chaincode
+  template:
+    metadata:
+      labels:
+        app: egat-refdata-chaincode
+    spec:
+      containers:
+      - name: egat-refdata-chaincode
+        image: phwuts/egat-p2p-reference-data-chaincode:0.0.1
+        imagePullPolicy: Always
+        env:
+        - name: CORE_CHAINCODE_ID
+          value: 'egat-refdata_0.0.1:'
+        - name: CORE_CHAINCODE_ADDRESS
+          value: 0.0.0.0:3000
+        ports:
+        - containerPort: 3000
+        resources: {}
+      dnsPolicy: ClusterFirst
