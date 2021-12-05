@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --chart -f docker-compose-refdata-hyperledger-api.yml
+    kompose.version: 1.25.0 (a70f80cc)
+  creationTimestamp: null
+  labels:
+    apps: egat-p2p-reference-data-hyperledger-api
+  name: egat-p2p-reference-data-hyperledger-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: egat-p2p-reference-data-hyperledger-api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --chart -f docker-compose-refdata-hyperledger-api.yml
+        kompose.version: 1.25.0 (a70f80cc)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/basic: "true"
+        apps: egat-p2p-reference-data-hyperledger-api
+    spec:
+      containers:
+        - env:
+            - name: APP_AFFILIATION
+              value: org1.department1
+            - name: APP_CCPPATH
+              value: /shared/blockchain/local-ccp.yml
+            - name: APP_CHAINCODE_EGAT_NAME
+              value: egat-refdata
+            - name: APP_EGAT_CHANNEL
+              value: egat
+            - name: APP_GENERIC_IDENTITY_ID
+              value: generic10
+            - name: APP_GENERIC_IDENTITY_MSPID
+              value: Org1MSP
+            - name: APP_GENERIC_IDENTITY_SECRET
+              value: generic10
+            - name: HOST
+              value: 0.0.0.0
+            - name: PORT
+              value: "5005"
+          image: phwuts/egat-p2p-reference-data-hyperledger-api:0.0.1
+          name: egat-p2p-reference-data-hyperledger-api
+          ports:
+            - containerPort: 5005
+          resources: {}
+          volumeMounts:
+            - mountPath: /shared/blockchain
+              name: egat-p2p-reference-data-hyperledger-api-claim0
+            - mountPath: /home/node/store
+              name: keystore
+      restartPolicy: Always
+      volumes:
+        - name: egat-p2p-reference-data-hyperledger-api-claim0
+          persistentVolumeClaim:
+            claimName: egat-p2p-reference-data-hyperledger-api-claim0
+        - name: keystore
+          persistentVolumeClaim:
+            claimName: keystore
+status: {}
