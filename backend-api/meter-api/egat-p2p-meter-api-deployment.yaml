@@ -47,7 +47,7 @@ spec:
               value: "http://proxy.egat.co.th:8080/"
             - name: https_proxy
               value: "http://proxy.egat.co.th:8080/"
-          image: phwuts/egat-p2p-meter-api:0.0.3
+          image: phwuts/egat-p2p-meter-api:0.0.5
           name: egat-p2p-meter-api
           ports:
             - containerPort: 4000
