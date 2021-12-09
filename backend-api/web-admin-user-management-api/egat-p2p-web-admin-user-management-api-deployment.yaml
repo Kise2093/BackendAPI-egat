@@ -45,7 +45,7 @@ spec:
             - name: PORT
               value: "3004"
             - name: URL_METER_API
-              value: http://egat-p2p-meter-api
+              value: http://egat-p2p-meter-api:4000
           image: phwuts/egat-p2p-web-admin-user-management-api:0.0.1
           name: egat-p2p-web-admin-user-management-api
           ports:

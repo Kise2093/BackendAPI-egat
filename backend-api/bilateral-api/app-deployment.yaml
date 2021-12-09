@@ -33,7 +33,8 @@ spec:
               value: development
             - name: TRADE_API_ENDPOINT
               value: http://host.docker.internal:39085
-          image: lenkunz/egat-p2p-forecast:1.0.0-beta
+# the image was list as forecast
+          image: lenkunz/egat-p2p-bilateral:1.0.0-beta
           name: egat-p2p-mobile-bilateral-api
           ports:
             - containerPort: 3000
