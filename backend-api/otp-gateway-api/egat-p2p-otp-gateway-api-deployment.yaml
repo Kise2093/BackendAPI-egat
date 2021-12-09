@@ -34,12 +34,6 @@ spec:
               value: "5"
             - name: PORT
               value: "4001"
-            - name: USERNAME_AUTH_API
-              value: egat
-            - name: PASSWORD_AUTH_API
-              value: fb227fe1-f5ca-4c92-ba63-758564915658
-            - name: MOBILE_BILATERAL_API_URL
-              value: http://egat-p2p-bilateral.di.iknowplus.co.th/
           image: phwuts/egat-p2p-otp-gateway-api:0.0.1
           name: egat-p2p-otp-gateway-api
           ports:
