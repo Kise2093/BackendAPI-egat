@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --chart -f docker-compose.power-job.yaml
+    kompose.version: 1.25.0 (a70f80cc)
+  creationTimestamp: null
+  labels:
+    apps: app
+  name: app
+spec:
+  ports:
+    - name: "39080"
+      port: 39080
+      targetPort: 3000
+  selector:
+    apps: app
+status:
+  loadBalancer: {}

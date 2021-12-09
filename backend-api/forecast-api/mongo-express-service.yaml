@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --chart -f docker-compose.forecast.yaml
+    kompose.version: 1.25.0 (a70f80cc)
+  creationTimestamp: null
+  labels:
+    apps: mongo-express
+  name: mongo-express
+spec:
+  ports:
+    - name: "39181"
+      port: 39181
+      targetPort: 8081
+  selector:
+    apps: mongo-express
+status:
+  loadBalancer: {}

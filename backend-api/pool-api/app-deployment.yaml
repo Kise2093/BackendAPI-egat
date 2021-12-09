@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    apps: egat-p2p-pool-api
+  name: egat-p2p-pool-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: egat-p2p-pool-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        apps: egat-p2p-pool-api
+    spec:
+      containers:
+        - env:
+            - name: MONGO_DATABASE
+              value: PoolDatabase
+            - name: MONGO_HOST
+              value: pool-mongodb-0-external
+            - name: MONGO_PASSWORD
+              value: Passw0rdEGAT
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_USER
+              value: user
+            - name: NODE_ENV
+              value: development
+          image: lenkunz/egat-p2p-pool:1.0.0-alpha.1
+          name: egat-p2p-pool-api
+          ports:
+            - containerPort: 3000
+          resources: {}
+      restartPolicy: Always

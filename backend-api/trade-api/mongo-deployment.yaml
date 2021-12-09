@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --chart -f docker-compose.trade.yaml
+    kompose.version: 1.25.0 (a70f80cc)
+  creationTimestamp: null
+  labels:
+    apps: mongo
+  name: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: mongo
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --chart -f docker-compose.trade.yaml
+        kompose.version: 1.25.0 (a70f80cc)
+      creationTimestamp: null
+      labels:
+        apps: mongo
+    spec:
+      containers:
+        - env:
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: example
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+          image: mongo
+          name: mongo
+          resources: {}
+      restartPolicy: Always
+status: {}

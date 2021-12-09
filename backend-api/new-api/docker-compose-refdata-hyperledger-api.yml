@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  egat-p2p-reference-data-hyperledger-api:
+    build: .
+    image: phwuts/egat-p2p-reference-data-hyperledger-api:0.0.1
+    environment:
+      - HOST=0.0.0.0
+      - PORT=5005
+      - APP_CCPPATH=/shared/blockchain/local-ccp.yml
+      - APP_CHAINCODE_EGAT_NAME=egat-refdata
+      - APP_EGAT_CHANNEL=egat
+      - APP_GENERIC_IDENTITY_ID=generic10
+      - APP_GENERIC_IDENTITY_SECRET=generic10
+      - APP_GENERIC_IDENTITY_MSPID=Org1MSP
+      - APP_AFFILIATION=org1.department1
+    ports:
+      - 5005:5005
+    volumes:
+      - ../hyperledger/connection-profile:/shared/blockchain
+      - keystore:/home/node/store
+    networks:
+      - basic
+
+networks:
+  basic:
+
+volumes:
+  keystore:

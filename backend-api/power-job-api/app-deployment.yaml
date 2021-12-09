@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --chart -f docker-compose.power-job.yaml
+    kompose.version: 1.25.0 (a70f80cc)
+  creationTimestamp: null
+  labels:
+    apps: app
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: app
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --chart -f docker-compose.power-job.yaml
+        kompose.version: 1.25.0 (a70f80cc)
+      creationTimestamp: null
+      labels:
+        apps: app
+    spec:
+      containers:
+        - env:
+            - name: API_FORECAST_ENDPOINT
+              value: http://host.docker.internal:39081
+            - name: API_POWER_ENDPOINT
+              value: http://host.docker.internal:39082
+            - name: MONGO_DATABASE
+              value: admin
+            - name: MONGO_HOST
+              value: mongo
+            - name: MONGO_PASSWORD
+              value: example
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_USER
+              value: root
+            - name: NODE_ENV
+              value: development
+            - name: POINTNAME_ENPOINT_BASE
+              value: http://10.40.62.181:20001/db
+            - name: POINTNAME_TIME_UTC_OFFSET_MINUTE
+              value: "420"
+            - name: SRISANGTHAM_ENPOINT_BASE
+              value: https://smarthomedev.egat.co.th
+            - name: SRISANGTHAM_EP_ENPOINT_BASE
+              value: https://ems.energy-pool.eu
+            - name: SRISANGTHAM_EP_PASSWORD
+              value: S3NraMv7sE#
+            - name: SRISANGTHAM_EP_USERNAME
+              value: a.limsupanark@egat
+            - name: SRISANGTHAM_TIME_UTC_OFFSET_MINUTE
+              value: "420"
+          image: lenkunz/egat-p2p-power-job:1.0.0-beta
+          name: app
+          ports:
+            - containerPort: 3000
+          resources: {}
+      restartPolicy: Always
+status: {}

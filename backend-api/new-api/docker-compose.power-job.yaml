@@ -1,0 +1,49 @@
+version: '3.5'
+
+services:
+  app:
+    build: .
+    image: lenkunz/egat-p2p-power-job:1.0.0-beta
+    restart: unless-stopped
+    environment:
+      - POINTNAME_ENPOINT_BASE=http://10.40.62.181:20001/db
+      - POINTNAME_TIME_UTC_OFFSET_MINUTE=420
+
+      - SRISANGTHAM_ENPOINT_BASE=https://smarthomedev.egat.co.th
+      - SRISANGTHAM_TIME_UTC_OFFSET_MINUTE=420
+
+      - SRISANGTHAM_EP_ENPOINT_BASE=https://ems.energy-pool.eu
+      - SRISANGTHAM_EP_USERNAME=a.limsupanark@egat
+      - SRISANGTHAM_EP_PASSWORD=S3NraMv7sE#
+
+      - API_POWER_ENDPOINT=http://host.docker.internal:39082
+      - API_FORECAST_ENDPOINT=http://host.docker.internal:39081
+
+      - NODE_ENV=development
+
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+      - MONGO_USER=root
+      - MONGO_PASSWORD=example
+      - MONGO_DATABASE=admin
+    ports:
+      - 39080:3000
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - 39183:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo

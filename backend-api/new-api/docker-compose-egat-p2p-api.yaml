@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  egat-p2p-api:
+    build: .
+    image: phwuts/egat-p2p-api:0.0.1
+    environment:
+      - HOST=0.0.0.0
+      - PORT=30000
+      - KEYCLOAK_OPENID_BASE_URL=https://keycloak.iknowplus.co.th/auth/realms/egat
+      - MOBILE_REGISTER_API_URL=https://egat-p2p-register.di.iknowplus.co.th
+      - MOBILE_LOGIN_API_URL=https://egat-p2p-login.di.iknowplus.co.th
+      - MOBILE_PROFILE_API_URL=https://egat-p2p-profile-mange.di.iknowplus.co.th
+      - 30000:30000
+    networks:
+      - egat-p2p
+
+networks:
+  egat-p2p:
+
+volumes:
+  keystore:

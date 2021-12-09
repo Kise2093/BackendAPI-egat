@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  egat-p2p-meter-api:
+    build: .
+    image: phwuts/egat-p2p-meter-api:0.0.3
+    environment:
+      - HOST=0.0.0.0
+      - PORT=4000
+      - MONGO_INITDB_HOST=masterdata-mongodb
+      - MONGO_INITDB_PORT=27017
+      - MONGO_INITDB_DATABASENAME=MasterDataDatabase
+      - MONGO_INITDB_USERNAME=user
+      - MONGO_INITDB_PASSWORD=Passw0rdEGAT
+      - APP_GEOCODING_URL=https://maps.googleapis.com/maps/api/geocode
+      - APP_API_KEY=AIzaSyCqNmC7Pgce5a44iW8cW9HDXIFPxJDhPgQ
+    ports:
+      - 4000:4000
+    links:
+      - masterdata-mongodb
+    networks:
+      - egat-p2p
+
+  masterdata-mongodb:
+    image: mongo:latest
+    container_name: masterdata-mongodb
+    restart: always
+    ports:
+      - 27027:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rdEGAT
+      - MONGO_INITDB_DATABASE=MasterDataDatabase
+      - MONGO_INITDB_USERNAME=user
+      - MONGO_INITDB_PASSWORD=Passw0rdEGAT
+    volumes:
+      - ../DevDB/init-mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ../DevDB/meterDb:/data/db
+    networks:
+      - egat-p2p
+
+networks:
+  egat-p2p:
+
+volumes:
+  keystore:

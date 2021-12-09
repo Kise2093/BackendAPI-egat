@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  egat-p2p-web-admin-login-api:
+    build: .
+    image: phwuts/egat-p2p-web-admin-login-api:0.0.1
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3003
+      - KEYCLOAK_BASE_URL=https://keycloak.iknowplus.co.th/auth
+      - KEYCLOAK_REALM_NAME=egat
+      - KEYCLOAK_OPENID_BASE_URL=https://keycloak.iknowplus.co.th/auth/realms/egat
+      - KEYCLOAK_OPENID_CLIENT_ID=egat-p2p-trading
+      - KEYCLOAK_OPENID_GRANT_TYPE=password
+      - KEYCLOAK_OPENID_ADMIN_USERNAME=admin
+      - KEYCLOAK_OPENID_ADMIN_PASSWORD=P@ssw0rdIKP
+      - KEYCLOAK_OPENID_EGAT_USERNAME=egat-p2p-user
+      - KEYCLOAK_OPENID_EGAT_PASSWORD=initPasswordEGAT
+    ports:
+      - 3003:3003
+    networks:
+      - egat-p2p
+
+networks:
+  egat-p2p:
+
+volumes:
+  keystore:

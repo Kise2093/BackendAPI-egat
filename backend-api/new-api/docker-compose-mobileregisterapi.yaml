@@ -1,0 +1,79 @@
+version: '3'
+
+services:
+  egat-p2p-mobile-register-api:
+    build: .
+    image: egat/egat-p2p-mobile-register-api:0.0.1
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+      - LIMIT_SESSION_EXPIRE_IN_MINUTE=10
+      - COOLDOWN_OTP_IN_SECOND=60
+      - URL_METER_API=https://egat-p2p-meter-api.di.iknowplus.co.th
+      - URL_OTP_GATEWAY_API=https://egat-p2p-otp-gateway-api.di.iknowplus.co.th
+      - KEYCLOAK_BASE_URL=https://keycloak.iknowplus.co.th/auth
+      - KEYCLOAK_REALM_NAME=egat
+      - KEYCLOAK_OPENID_BASE_URL=https://keycloak.iknowplus.co.th/auth/realms/egat
+      - KEYCLOAK_OPENID_CLIENT_ID=egat-p2p-trading
+      - KEYCLOAK_OPENID_GRANT_TYPE=password
+      - KEYCLOAK_OPENID_USERNAME=admin
+      - KEYCLOAK_OPENID_PASSWORD=P@ssw0rdIKP
+      # SESSION_DB
+      - MONGO_SESSIONDB_HOST=sessiondb
+      - MONGO_SESSIONDB_PORT=27017
+      - MONGO_SESSIONDB_DATABASENAME=SessionDatabase
+      - MONGO_SESSIONDB_USERNAME=sessionuser
+      - MONGO_SESSIONDB_PASSWORD=Passw0rdIKP
+      # USER_DB
+      - MONGO_USERDB_HOST=userdb
+      - MONGO_USERDB_PORT=27017
+      - MONGO_USERDB_DATABASENAME=UserDatabase
+      - MONGO_USERDB_USERNAME=profileuser
+      - MONGO_USERDB_PASSWORD=Passw0rdIKP
+    ports:
+      - 3000:3000
+    links:
+      - sessiondb
+      - userdb
+    networks:
+      - egat-p2p
+
+  sessiondb:
+    image: mongo:latest
+    container_name: sessiondb
+    ports:
+      - 27018:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rdIKP
+      - MONGO_INITDB_DATABASE=SessionDatabase
+      - MONGO_INITDB_USERNAME=sessionuser
+      - MONGO_INITDB_PASSWORD=Passw0rdIKP
+    volumes:
+      - ../../DevDB/init-mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ../../DevDB/sessionDb:/data/db
+    networks:
+      - egat-p2p
+
+  userdb:
+    image: mongo:latest
+    container_name: userdb
+    ports:
+      - 27019:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rdIKP
+      - MONGO_INITDB_DATABASE=UserDatabase
+      - MONGO_INITDB_USERNAME=profileuser
+      - MONGO_INITDB_PASSWORD=Passw0rdIKP
+    volumes:
+      - ../../DevDB/init-mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ../../DevDB/userDb:/data/db
+    networks:
+      - egat-p2p
+
+networks:
+  egat-p2p:
+
+volumes:
+  keystore:

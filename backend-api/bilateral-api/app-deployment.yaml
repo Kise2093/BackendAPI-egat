@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    apps: egat-p2p-mobile-bilateral-api
+  name: egat-p2p-mobile-bilateral-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: egat-p2p-mobile-bilateral-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        apps: egat-p2p-mobile-bilateral-api
+    spec:
+      containers:
+        - env:
+            - name: METER_API_ENDPOINT
+              value: http://egat-p2p-meter-api
+            - name: MONGO_DATABASE
+              value: BilateralDatabase
+            - name: MONGO_HOST
+              value: bilateral-mongodb-0-external
+            - name: MONGO_PASSWORD
+              value: Passw0rdEGAT
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_USER
+              value: user
+            - name: NODE_ENV
+              value: development
+            - name: TRADE_API_ENDPOINT
+              value: http://host.docker.internal:39085
+          image: lenkunz/egat-p2p-forecast:1.0.0-beta
+          name: egat-p2p-mobile-bilateral-api
+          ports:
+            - containerPort: 3000
+          resources: {}
+      restartPolicy: Always
+status: {}

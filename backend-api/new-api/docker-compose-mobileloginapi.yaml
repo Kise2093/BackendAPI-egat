@@ -1,0 +1,80 @@
+version: '3'
+
+services:
+  egat-p2p-mobile-login-api:
+    build: .
+    image: phwuts/egat-p2p-mobile-login-api:0.0.1
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3001
+      - LIMIT_SESSION_EXPIRE_IN_MINUTE=10
+      - COOLDOWN_OTP_IN_SECOND=60
+      - URL_OTP_GATEWAY_API=https://egat-p2p-otp-gateway-api.di.iknowplus.co.th
+      - KEYCLOAK_BASE_URL=https://keycloak.iknowplus.co.th/auth
+      - KEYCLOAK_REALM_NAME=egat
+      - KEYCLOAK_OPENID_BASE_URL=https://keycloak.iknowplus.co.th/auth/realms/egat
+      - KEYCLOAK_OPENID_CLIENT_ID=egat-p2p-trading
+      - KEYCLOAK_OPENID_GRANT_TYPE=password
+      - KEYCLOAK_OPENID_ADMIN_USERNAME=admin
+      - KEYCLOAK_OPENID_ADMIN_PASSWORD=P@ssw0rdIKP
+      - KEYCLOAK_OPENID_EGAT_USERNAME=egat-p2p-user
+      - KEYCLOAK_OPENID_EGAT_PASSWORD=initPasswordEGAT
+      # SESSION_DB
+      - MONGO_SESSIONDB_HOST=session-mongodb
+      - MONGO_SESSIONDB_PORT=27017
+      - MONGO_SESSIONDB_DATABASENAME=SessionDatabase
+      - MONGO_SESSIONDB_USERNAME=user
+      - MONGO_SESSIONDB_PASSWORD=Passw0rdIKP
+      # USER_DB
+      - MONGO_USERDB_HOST=userprofile-mongodb
+      - MONGO_USERDB_PORT=27017
+      - MONGO_USERDB_DATABASENAME=UserDatabase
+      - MONGO_USERDB_USERNAME=profileuser
+      - MONGO_USERDB_PASSWORD=Passw0rdIKP
+    ports:
+      - 3001:3001
+    links:
+      - userprofile-mongodb
+      - session-mongodb
+    networks:
+      - egat-p2p
+
+  session-mongodb:
+    image: mongo:latest
+    container_name: session-mongodb
+    ports:
+      - 27018:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rdIKP
+      - MONGO_INITDB_DATABASE=SessionDatabase
+      - MONGO_INITDB_USERNAME=user
+      - MONGO_INITDB_PASSWORD=Passw0rdIKP
+    volumes:
+      - ../../DevDB/init-mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ../../DevDB/sessionDb:/data/db
+    networks:
+      - egat-p2p
+
+  userprofile-mongodb:
+    image: mongo:latest
+    container_name: userprofile-mongodb
+    ports:
+      - 27019:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rdIKP
+      - MONGO_INITDB_DATABASE=UserDatabase
+      - MONGO_INITDB_USERNAME=user
+      - MONGO_INITDB_PASSWORD=Passw0rdIKP
+    volumes:
+      - ../../DevDB/init-mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ../../DevDB/userDb:/data/db
+    networks:
+      - egat-p2p
+
+networks:
+  egat-p2p:
+
+volumes:
+  keystore:

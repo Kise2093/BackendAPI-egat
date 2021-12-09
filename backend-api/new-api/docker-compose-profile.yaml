@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  egat-p2p-mobile-profile-api:
+    build: .
+    image: phwuts/egat-p2p-mobile-profile-api:0.0.1
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3002
+      - KEYCLOAK_BASE_URL=https://keycloak.iknowplus.co.th/auth
+      - KEYCLOAK_REALM_NAME=egat
+      - KEYCLOAK_OPENID_BASE_URL=https://keycloak.iknowplus.co.th/auth/realms/egat
+      - KEYCLOAK_OPENID_CLIENT_ID=egat-p2p-trading
+      - KEYCLOAK_OPENID_GRANT_TYPE=password
+      - KEYCLOAK_OPENID_USERNAME=admin
+      - KEYCLOAK_OPENID_PASSWORD=P@ssw0rdIKP
+      # USER_DB
+      - MONGO_USERDB_HOST=userprofile-mongodb
+      - MONGO_USERDB_PORT=27017
+      - MONGO_USERDB_DATABASENAME=UserDatabase
+      - MONGO_USERDB_USERNAME=user
+      - MONGO_USERDB_PASSWORD=Passw0rdEGAT
+    ports:
+      - 3002:3002
+    links:
+      - userprofile-mongodb
+    networks:
+      - egat-p2p
+
+  userprofile-mongodb:
+    image: mongo:latest
+    container_name: userprofile-mongodb
+    ports:
+      - 27019:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rdEGAT
+      - MONGO_INITDB_DATABASE=UserDatabase
+      - MONGO_INITDB_USERNAME=user
+      - MONGO_INITDB_PASSWORD=Passw0rdEGAT
+    volumes:
+      - ../../DevDB/init-mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ../../DevDB/userDb:/data/db
+    networks:
+      - egat-p2p
+
+networks:
+  egat-p2p:
+
+volumes:
+  keystore:

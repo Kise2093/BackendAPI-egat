@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    apps: egat-p2p-mobile-bilateral-api
+  name: egat-p2p-mobile-bilateral-api
+spec:
+  ports:
+    - name: "39083"
+      port: 39083
+      targetPort: 3000
+    - name: "39081"
+      port: 39081
+      targetPort: 3000
+  selector:
+    apps: egat-p2p-mobile-bilateral-api
+

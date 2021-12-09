@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  egat-p2p-web-admin-user-management-api:
+    build: .
+    image: phwuts/egat-p2p-web-admin-user-management-api:0.0.1
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3004
+      - URL_METER_API=https://egat-p2p-meter-api.di.iknowplus.co.th
+      - KEYCLOAK_BASE_URL=https://keycloak.iknowplus.co.th/auth
+      - KEYCLOAK_REALM_NAME=egat
+      - KEYCLOAK_OPENID_BASE_URL=https://keycloak.iknowplus.co.th/auth/realms/egat
+      - KEYCLOAK_OPENID_CLIENT_ID=egat-p2p-trading
+      - KEYCLOAK_OPENID_GRANT_TYPE=password
+      - KEYCLOAK_OPENID_USERNAME=admin
+      - KEYCLOAK_OPENID_PASSWORD=P@ssw0rdIKP
+      - MONGO_INITDB_HOST=masterdata-mongodb
+      - MONGO_INITDB_PORT=27017
+      - MONGO_INITDB_DATABASENAME=MasterDataDatabase
+      - MONGO_INITDB_USERNAME=user
+      - MONGO_INITDB_PASSWORD=Passw0rdEGAT
+    ports:
+      - 3004:3004
+    links:
+      - masterdata-mongodb
+    networks:
+      - egat-p2p
+
+  masterdata-mongodb:
+    image: mongo:latest
+    container_name: masterdata-mongodb
+    restart: always
+    ports:
+      - 27027:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rdEGAT
+      - MONGO_INITDB_DATABASE=MasterDataDatabase
+      - MONGO_INITDB_USERNAME=user
+      - MONGO_INITDB_PASSWORD=Passw0rdEGAT
+    volumes:
+      - ../../DevDB/init-mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ../../DevDB/meterDb:/data/db
+    networks:
+      - egat-p2p
+
+networks:
+  egat-p2p:
+
+volumes:
+  keystore:

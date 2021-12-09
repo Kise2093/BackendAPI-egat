@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  egat-p2p-otp-gateway-api:
+    build: .
+    image: phwuts/egat-p2p-otp-gateway-api:0.0.1
+    environment:
+      - HOST=0.0.0.0
+      - PORT=4001
+      - MONGO_INITDB_HOST=otp-mongodb
+      - MONGO_INITDB_PORT=27017
+      - MONGO_INITDB_DATABASENAME=OtpDatabase
+      - MONGO_INITDB_USERNAME=user
+      - MONGO_INITDB_PASSWORD=Passw0rdEGAT
+      - LENGTH_REFERENCE_OTP=6
+      - OTP_EXPIRE_IN_MINUTE=5
+    ports:
+      - 4001:4001
+    links:
+      - otp-mongodb
+    networks:
+      - egat-p2p
+
+  otp-mongodb:
+    image: mongo:latest
+    container_name: otp-mongodb
+    ports:
+      - 27028:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rdEGAT
+      - MONGO_INITDB_DATABASE=OtpDatabase
+      - MONGO_INITDB_USERNAME=user
+      - MONGO_INITDB_PASSWORD=Passw0rdEGAT
+    volumes:
+      - ../DevDB/init-mongo/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ../DevDB/otpDb:/data/db
+    networks:
+      - egat-p2p
+
+networks:
+  egat-p2p:
+
+volumes:
+  keystore:
