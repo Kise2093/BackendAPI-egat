@@ -35,6 +35,18 @@ spec:
               value: user
             - name: PORT
               value: "4000"
+            - name: NO_PROXY
+              value: "127.0.0.1,localhost,10.96.0.0/12,10.40.58.0/24,10.40.62.0/24,192.168.0.0/16"
+            - name: HTTP_PROXY
+              value: "http://proxy.egat.co.th:8080/"
+            - name: HTTPS_PROXY
+              value: "http://proxy.egat.co.th:8080/"
+            - name: no_proxy
+              value: "127.0.0.1,localhost,10.96.0.0/12,10.40.58.0/24,10.40.62.0/24,192.168.0.0/16"
+            - name: http_proxy
+              value: "http://proxy.egat.co.th:8080/"
+            - name: https_proxy
+              value: "http://proxy.egat.co.th:8080/"
           image: phwuts/egat-p2p-meter-api:0.0.3
           name: egat-p2p-meter-api
           ports:
