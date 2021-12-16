@@ -32,7 +32,7 @@ spec:
             - name: NODE_ENV
               value: development
             - name: TRADE_API_ENDPOINT
-              value: http://egat-p2p-trade-job-api
+              value: http://egat-p2p-trade-job-api:39085
           image: lenkunz/egat-p2p-bilateral:1.0.0-beta
           name: egat-p2p-mobile-bilateral-api
           ports:

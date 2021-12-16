@@ -30,7 +30,7 @@ spec:
             - name: NODE_ENV
               value: development
             - name: TRADE_API_ENDPOINT
-              value: http://egat-p2p-trade-job-api
+              value: http://egat-p2p-trade-job-api:39085
             - name: METER_API_ENDPOINT
               value: http://egat-p2p-meter-api:4000
             - name: REFERENCE_API_ENDPOINT

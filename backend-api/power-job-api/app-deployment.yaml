@@ -18,9 +18,9 @@ spec:
       containers:
         - env:
             - name: API_FORECAST_ENDPOINT
-              value: http://egat-p2p-mobile-forecast-api
+              value: http://egat-p2p-mobile-forecast-api:39081
             - name: API_POWER_ENDPOINT
-              value: http://egat-p2p-mobile-power-api
+              value: http://egat-p2p-mobile-power-api:39082
             - name: MONGO_DATABASE
               value: JobDatabase
             - name: MONGO_HOST
