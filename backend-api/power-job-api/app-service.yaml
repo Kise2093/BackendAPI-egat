@@ -1,19 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: kompose convert --chart -f docker-compose.power-job.yaml
-    kompose.version: 1.25.0 (a70f80cc)
-  creationTimestamp: null
   labels:
-    apps: app
-  name: app
+    apps: egat-p2p-mobile-power-job-api
+  name: egat-p2p-mobile-power-job-api
 spec:
   ports:
     - name: "39080"
       port: 39080
       targetPort: 3000
   selector:
-    apps: app
+    apps: egat-p2p-mobile-power-job-api
 status:
   loadBalancer: {}
