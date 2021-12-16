@@ -2,27 +2,27 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    apps: app
-  name: app
+    apps: egat-p2p-mobile-forecast-api
+  name: egat-p2p-mobile-forecast-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      apps: app
+      apps: egat-p2p-mobile-forecast-api
   strategy: {}
   template:
     metadata:
       labels:
-        apps: app
+        apps: egat-p2p-mobile-forecast-api
     spec:
       containers:
         - env:
             - name: MONGO_DATABASE
-              value: admin
+              value: EnergyForecastDatabase
             - name: MONGO_HOST
-              value: mongo
+              value: energyforecast-mongodb-0-external
             - name: MONGO_PASSWORD
-              value: example
+              value: Passw0rdEGAT
             - name: MONGO_PORT
               value: "27017"
             - name: MONGO_USER
@@ -30,7 +30,7 @@ spec:
             - name: NODE_ENV
               value: development
           image: lenkunz/egat-p2p-forecast:1.0.0-beta
-          name: app
+          name: egat-p2p-mobile-forecast-api
           ports:
             - containerPort: 3000
           resources: {}
