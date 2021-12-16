@@ -2,18 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    apps: egat-p2p-pool-api
-  name: egat-p2p-pool-api
+    apps: egat-p2p-mobile-pool-api
+  name: egat-p2p-mobile-pool-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      apps: egat-p2p-pool-api
+      apps: egat-p2p-mobile-pool-api
   strategy: {}
   template:
     metadata:
       labels:
-        apps: egat-p2p-pool-api
+        apps: egat-p2p-mobile-pool-api
     spec:
       containers:
         - env:
@@ -29,8 +29,12 @@ spec:
               value: user
             - name: NODE_ENV
               value: development
+            - name: TRADE_API_ENDPOINT
+              value: http://egat-p2p-trade-job-api
+            - name: METER_API_ENDPOINT
+              value: http://egat-p2p-meter-api:4000
           image: lenkunz/egat-p2p-pool:1.0.0-alpha.1
-          name: egat-p2p-pool-api
+          name: egat-p2p-mobile-pool-api
           ports:
             - containerPort: 3000
           resources: {}
