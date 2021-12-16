@@ -18,7 +18,7 @@ spec:
       containers:
         - env:
             - name: METER_API_ENDPOINT
-              value: http://egat-p2p-meter-api
+              value: http://egat-p2p-meter-api:
             - name: MONGO_DATABASE
               value: BilateralDatabase
             - name: MONGO_HOST
@@ -32,8 +32,7 @@ spec:
             - name: NODE_ENV
               value: development
             - name: TRADE_API_ENDPOINT
-              value: http://host.docker.internal:39085
-# the image was list as forecast
+              value: http://egat-p2p-trade-job-api:
           image: lenkunz/egat-p2p-bilateral:1.0.0-beta
           name: egat-p2p-mobile-bilateral-api
           ports:
