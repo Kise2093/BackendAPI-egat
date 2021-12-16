@@ -1,46 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert --chart -f docker-compose.trade.yaml
-    kompose.version: 1.25.0 (a70f80cc)
-  creationTimestamp: null
   labels:
-    apps: app
-  name: app
+    apps: egat-p2p-mobile-trade-api
+  name: egat-p2p-mobile-trade-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      apps: app
+      apps: egat-p2p-mobile-trade-api
   strategy: {}
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert --chart -f docker-compose.trade.yaml
-        kompose.version: 1.25.0 (a70f80cc)
-      creationTimestamp: null
       labels:
-        apps: app
+        apps: egat-p2p-mobile-trade-api
     spec:
       containers:
         - env:
             - name: INVOICE_VAT_RATE
               value: "0.07"
             - name: MONGO_DATABASE
-              value: admin
+              value: TradeDatabase
             - name: MONGO_HOST
-              value: mongo
+              value: trade-mongodb-0-external
             - name: MONGO_PASSWORD
-              value: example
+              value: Passw0rdEGAT
             - name: MONGO_PORT
               value: "27017"
             - name: MONGO_USER
-              value: root
+              value: user
             - name: NODE_ENV
               value: development
           image: lenkunz/egat-p2p-trade:1.0.0-beta
-          name: app
+          name: egat-p2p-mobile-trade-api
           ports:
             - containerPort: 3000
           resources: {}

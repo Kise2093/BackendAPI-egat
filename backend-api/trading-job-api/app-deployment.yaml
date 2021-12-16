@@ -1,34 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert --chart -f docker-compose.trading-job.yaml
-    kompose.version: 1.25.0 (a70f80cc)
-  creationTimestamp: null
   labels:
-    apps: app
-  name: app
+    apps: egat-p2p-mobile-trading-job-api
+  name: egat-p2p-mobile-trading-job-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      apps: app
+      apps: egat-p2p-mobile-trading-job-api
   strategy: {}
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert --chart -f docker-compose.trading-job.yaml
-        kompose.version: 1.25.0 (a70f80cc)
-      creationTimestamp: null
       labels:
-        apps: app
+        apps: egat-p2p-mobile-trading-job-api
     spec:
       containers:
         - env:
             - name: BILATERAL_API_ENDPOINT
-              value: http://host.docker.internal:39083
+              value: http://egat-p2p-mobile-bilateral-api
             - name: FORECAST_API_ENDPOINT
-              value: http://host.docker.internal:39081
+              value: http://egat-p2p-mobile-forecast-api
             - name: MONGO_DATABASE
               value: admin
             - name: MONGO_HOST
@@ -42,15 +34,15 @@ spec:
             - name: NODE_ENV
               value: development
             - name: POOL_API_ENDPOINT
-              value: http://host.docker.internal:39084
+              value: http://egat-p2p-mobile-pool-api
             - name: POWER_API_ENDPOINT
-              value: http://host.docker.internal:39082
+              value: http://egat-p2p-mobile-power-api
             - name: TRADE_API_ENDPOINT
-              value: http://host.docker.internal:39085
+              value: http://egat-p2p-mobile-trade-api
             - name: VAT_RATE
               value: "0.07"
           image: lenkunz/egat-p2p-trading-job:1.0.0-alpha.1
-          name: app
+          name: egat-p2p-mobile-trading-job-api
           ports:
             - containerPort: 3000
           resources: {}

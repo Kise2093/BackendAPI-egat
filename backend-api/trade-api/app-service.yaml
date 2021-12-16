@@ -1,19 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: kompose convert --chart -f docker-compose.trade.yaml
-    kompose.version: 1.25.0 (a70f80cc)
-  creationTimestamp: null
   labels:
-    apps: app
-  name: app
+    apps: egat-p2p-mobile-trade-api
+  name: egat-p2p-mobile-trade-api
 spec:
   ports:
     - name: "39085"
       port: 39085
       targetPort: 3000
   selector:
-    apps: app
+    apps: egat-p2p-mobile-trade-api
 status:
   loadBalancer: {}
