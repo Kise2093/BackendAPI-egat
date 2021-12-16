@@ -2,13 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    apps: egat-p2p-pool-api
-  name: egat-p2p-pool-api
+    apps: egat-p2p-mobile-pool-api
+  name: egat-p2p-mobile-pool-api
 spec:
   ports:
     - name: "39084"
       port: 39084
       targetPort: 3000
   selector:
-    apps: egat-p2p-pool-api
+    apps: egat-p2p-mobile-pool-api
 
