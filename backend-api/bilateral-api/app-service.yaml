@@ -9,9 +9,6 @@ spec:
     - name: "39083"
       port: 39083
       targetPort: 3000
-    - name: "39081"
-      port: 39081
-      targetPort: 3000
   selector:
     apps: egat-p2p-mobile-bilateral-api
 
