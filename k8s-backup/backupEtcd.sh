@@ -19,6 +19,8 @@ FILE_NAME="$BASE_FILE_NAME.$CURRENT_TIME.db"
 #TODO delete file older than 7 days 
 #write echo what file was deleted
 
-find $BACKUP_PATH -mtime +7 #-type f -delete
+find $BACKUP_PATH -cmin +10 -type f -delete
+
+#find $BACKUP_PATH -mtime +7 -type f -delete
 
 echo "script finish at: $CURRENT_TIME"
