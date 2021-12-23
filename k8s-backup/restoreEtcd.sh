@@ -2,7 +2,7 @@ BACKUP_PATH=/home/ptwop/etcd-backup
 
 
 FILE_NAME=$(find $BACKUP_PATH -type f -exec stat -c '%Y %n' {} \; | sort -nr | awk 'NR==1 {print $2}')
-LATEST_FILE_NAME=$(echo "$FILE_NAME" | awk -F/ '{print $2}')
+LATEST_FILE_NAME=$(echo "$FILE_NAME" | awk -F/ '{print $4}')
 
 echo $LATEST_FILE_NAME
 
