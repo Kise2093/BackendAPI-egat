@@ -6,6 +6,17 @@ LATEST_FILE_NAME=$(echo "$FILE_NAME" | awk -F/ '{print $5}')
 
 echo $LATEST_FILE_NAME
 
+while true; do
+    read -p "Do you wish to install this program?" yn
+    case $yn in
+        [Yy]* ) make install; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+
+
 #etcdctl --endpoints 10.40.58.160:2379 snapshot $FILE_NAME 
 
 echo "Restoring an etcd cluster using $LATEST_FILE_NAME snapshot at path $FILE_NAME"
