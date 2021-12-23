@@ -6,4 +6,6 @@ LATEST_FILE_NAME=$(echo "$FILE_NAME" | awk -F/ '{print $5}')
 
 echo $LATEST_FILE_NAME
 
-#etcdctl --endpoints 10.40.58.160:2379 snapshot restore snapshotdb
+#etcdctl --endpoints 10.40.58.160:2379 snapshot $FILE_NAME 
+
+echo "Restoring an etcd cluster using $LATEST_FILE_NAME snapshot at path $FILE_NAME"
