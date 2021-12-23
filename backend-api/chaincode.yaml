@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: egat-refdata-chaincode
-        image: phwuts/egat-p2p-reference-data-chaincode:0.0.1
+        image: phwuts/egat-p2p-reference-data-chaincode:0.0.7
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
