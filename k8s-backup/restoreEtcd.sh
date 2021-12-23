@@ -7,9 +7,9 @@ LATEST_FILE_NAME=$(echo "$FILE_NAME" | awk -F/ '{print $5}')
 echo $LATEST_FILE_NAME
 
 while true; do
-    read -p "Do you wish to install this program?" yn
+    read -p "Do you wish to restore etcd cluster using $LATEST_FILE_NAME ? [Y/n]" yn
     case $yn in
-        [Yy]* ) make install; break;;
+        [Yy]* ) echo $LATEST_FILE_NAME ; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
