@@ -11,3 +11,7 @@ iknowplus
 2. register-api
 - kubectl apply -f . (for register-api folder) (might have to change mongo to helm installation)
 
+1. Update deployment to newest version by (will not update svc)
+- git pull 
+- bash deployment_update.sh
+
