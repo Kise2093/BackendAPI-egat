@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo $(find backend-api -type f -name '*-deployment.yaml' | sed 's/ / -f /') > tmp_find_deployment.txt
+echo $(find . -type f -name '*-deployment.yaml' | sed 's/ / -f /') > tmp_find_deployment.txt
 
 
 NUMBER_OF_API=$(cat tmp_find_deployment.txt | awk '{print NF}');
