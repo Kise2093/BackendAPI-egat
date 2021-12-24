@@ -18,3 +18,6 @@ do
 done
 
 #bash tmp_deployment_script.sh
+
+#rm -f tmp_deployment_script.sh
+rm -f tmp_find_deployment.txt

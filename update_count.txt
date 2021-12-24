@@ -1,0 +1,3 @@
+update_application.sh: 0 
+update_svc.sh: 0 
+update_deployment.sh: 0 
