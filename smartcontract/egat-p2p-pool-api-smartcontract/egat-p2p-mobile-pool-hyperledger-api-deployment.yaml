@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: egat-p2p-mobile-bilateral-hyperledger-api
-  name: egat-p2p-mobile-bilateral-hyperledger-api
+    app: egat-p2p-mobile-pool-hyperledger-api
+  name: egat-p2p-mobile-pool-hyperledger-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: egat-p2p-mobile-bilateral-hyperledger-api
+      app: egat-p2p-mobile-pool-hyperledger-api
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: egat-p2p-mobile-bilateral-hyperledger-api
+        app: egat-p2p-mobile-pool-hyperledger-api
     spec:
       containers:
         - env:
@@ -25,7 +25,7 @@ spec:
             - name: APP_CHAINCODE_CHANNEL
               value: mychannel
             - name: APP_CHAINCODE_NAME
-              value: bilateral-log
+              value: pool-log
             - name: APP_GENERIC_IDENTITY_ID
               value: generic10
             - name: APP_GENERIC_IDENTITY_MSPID
@@ -35,20 +35,20 @@ spec:
             - name: HOST
               value: 0.0.0.0
             - name: PORT
-              value: "5006"
-          image: phwuts/egat-p2p-mobile-bilateral-hyperledger-api:0.0.1
-          name: egat-p2p-mobile-bilateral-hyperledger-api
+              value: "5007"
+          image: phwuts/egat-p2p-mobile-pool-hyperledger-api:0.0.1
+          name: egat-p2p-mobile-pool-hyperledger-api
           ports:
-            - containerPort: 5006
+            - containerPort: 5007
           resources: {}
           volumeMounts:
             - mountPath: /shared/
-              name: egat-p2p-mobile-bilateral-hyperledger-api-claim0
+              name: egat-p2p-mobile-pool-hyperledger-api-claim0
             - mountPath: /home/node/store
               name: keystore
       restartPolicy: Always
       volumes:
-        - name: egat-p2p-mobile-bilateral-hyperledger-api-claim0
+        - name: egat-p2p-mobile-pool-hyperledger-api-claim0
           persistentVolumeClaim:
             claimName: share-pvc
         - name: keystore
