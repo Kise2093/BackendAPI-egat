@@ -34,7 +34,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
-          value: 'egat-pool_0.0.1:xxxxxxx'
+          value: 'pool-log_0.0.2:24a702bbc26ffb922c1ba8f439197a7075d6606ea4efe37ca13d1e035dabc7d0'
         - name: CORE_CHAINCODE_ADDRESS
           value: 0.0.0.0:3000
         ports:
