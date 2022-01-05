@@ -1,0 +1,144 @@
+name: egat-p2p
+x-type: hlfv1
+description: Sample connection profile for documentation topic
+version: '1.0'
+client:
+  organization: Org1
+  tlsEnable: true
+  enableAuthentication: true
+  caCredential:
+    id: admin
+    password: adminpw
+  credentialStore:
+    path: /tmp/hfc-kvs
+    cryptoStore:
+      path: /tmp/hfc-cvs
+    wallet: wallet
+channels:
+  mychannel:
+    orderers:
+      - orderer0
+      - orderer1
+      - orderer2
+    peers:
+      peer0.org1:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+organizations:
+  Org1:
+    mspid: org1MSP
+    peers:
+      - peer0.org1
+    certificateAuthorities:
+      - ca_org1
+orderers:
+  orderer0:
+    url: grpcs://orderer0:7050
+    grpcOptions:
+      ssl-target-name-override: orderer0
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICQTCCAeigAwIBAgIQSl+ybojQJ/iqtenC3OycUDAKBggqhkjOPQQDAjBqMQsw
+        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+        YW5jaXNjbzETMBEGA1UEChMKY29uc29ydGl1bTEZMBcGA1UEAxMQdGxzY2EuY29u
+        c29ydGl1bTAeFw0yMTExMTEwNzQ4MDBaFw0zMTExMDkwNzQ4MDBaME0xCzAJBgNV
+        BAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNp
+        c2NvMREwDwYDVQQDEwhvcmRlcmVyMDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IA
+        BHhw1uiR7SOpGA95oUSlpZgzID3sYO3HUyl6FxC8UHEqArWmwISr+Iq8cZ3crVWr
+        jKRCHAgtaZ6gWo0FC3EYPq+jgYwwgYkwDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQW
+        MBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKA
+        IBM2jauS0hbc2oZLVukkoUan1ykSpo0sorbVYY3XW9W4MB0GA1UdEQQWMBSCCG9y
+        ZGVyZXIwgghvcmRlcmVyMDAKBggqhkjOPQQDAgNHADBEAiBTkXZR/4Q/duuDFEBf
+        zddckDMDv2lL9NIvkfqQifUiwgIgbDfWkEdVGQ0FBPpAQ7APKvUelcEEVfUEDqUF
+        6mz3hTw=
+        -----END CERTIFICATE-----
+  orderer1:
+    url: grpcs://orderer1:7050
+    grpcOptions:
+      ssl-target-name-override: orderer1
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICQTCCAeigAwIBAgIQEK+EimKfBuOfYX/xhzKbGDAKBggqhkjOPQQDAjBqMQsw
+        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+        YW5jaXNjbzETMBEGA1UEChMKY29uc29ydGl1bTEZMBcGA1UEAxMQdGxzY2EuY29u
+        c29ydGl1bTAeFw0yMTExMTEwNzQ4MDBaFw0zMTExMDkwNzQ4MDBaME0xCzAJBgNV
+        BAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNp
+        c2NvMREwDwYDVQQDEwhvcmRlcmVyMTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IA
+        BAme52A2cIs4qdNQ37dkot50eSFqp0ll7P5Dyp4mJWgVRvYJToUSkECMljrpTvDp
+        VuWAGhIeVNsEEG8K4uh6EbajgYwwgYkwDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQW
+        MBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKA
+        IBM2jauS0hbc2oZLVukkoUan1ykSpo0sorbVYY3XW9W4MB0GA1UdEQQWMBSCCG9y
+        ZGVyZXIxgghvcmRlcmVyMTAKBggqhkjOPQQDAgNHADBEAiA07Nr+i4k+84w/OoQU
+        iG+gp42e3jta4St5ISt8htjo+wIgBCjPU/uNHcZXq4Lc81hso5RXZZGWO6c+6zzZ
+        clIDEBA=
+        -----END CERTIFICATE-----
+  orderer2:
+    url: grpcs://orderer2:7050
+    grpcOptions:
+      ssl-target-name-override: orderer2
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICQzCCAemgAwIBAgIRAP8Ryy/xntOGC1QUdI2dLJAwCgYIKoZIzj0EAwIwajEL
+        MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+        cmFuY2lzY28xEzARBgNVBAoTCmNvbnNvcnRpdW0xGTAXBgNVBAMTEHRsc2NhLmNv
+        bnNvcnRpdW0wHhcNMjExMTExMDc0ODAwWhcNMzExMTA5MDc0ODAwWjBNMQswCQYD
+        VQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5j
+        aXNjbzERMA8GA1UEAxMIb3JkZXJlcjIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNC
+        AAQCMX7uJFUw4D+jwjQgDcDXjd2KpaZk9Y3jfRmrED075Nem1SIxjXHwykeAtIud
+        fpSxLqDfHF0s/OYcx8Aez2k5o4GMMIGJMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUE
+        FjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADArBgNVHSMEJDAi
+        gCATNo2rktIW3NqGS1bpJKFGp9cpEqaNLKK21WGN11vVuDAdBgNVHREEFjAUgghv
+        cmRlcmVyMoIIb3JkZXJlcjIwCgYIKoZIzj0EAwIDSAAwRQIhAI2bK1HyUYT6FUxO
+        mKuswvFw7AybLaGv7s3ARPAmraPaAiA1MovDyUv/Xttv05yMN6jnCBSKR7GCWqyS
+        X7FkrBSIrg==
+        -----END CERTIFICATE-----
+peers:
+  peer0.org1:
+    url: grpcs://peer0-org1:7051
+    grpcOptions:
+      ssl-target-name-override: peer0-org1
+      request-timeout: 120001
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICNzCCAd2gAwIBAgIQOvYC9mCH/YCWHbYA2CY8RTAKBggqhkjOPQQDAjBeMQsw
+        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+        YW5jaXNjbzENMAsGA1UEChMEb3JnMTETMBEGA1UEAxMKdGxzY2Eub3JnMTAeFw0y
+        MTExMTEwNzQ4MDBaFw0zMTExMDkwNzQ4MDBaME8xCzAJBgNVBAYTAlVTMRMwEQYD
+        VQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMRMwEQYDVQQD
+        EwpwZWVyMC1vcmcxMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEevQ+2nEcCpmQ
+        JOtOt9K9j7gnfCdsU4NETerhsTwHZB8quOloPndwYsYRoVkMWCs99pziZuHI++iB
+        yaGPNedqoqOBizCBiDAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUH
+        AwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwKwYDVR0jBCQwIoAg1eTy3mJ1ytcL
+        TH/hEGQQjDZkVR0wX7O1L7gWGDK/zwkwHAYDVR0RBBUwE4IKcGVlcjAtb3JnMYIF
+        cGVlcjAwCgYIKoZIzj0EAwIDSAAwRQIhAKbMNqG6a4X5+Wcd8zFt21zBDekIssUp
+        HEdIzQkcDypyAiBZqndY1L8EkgvHn4RvTiMQWbTuP8nTkkH7NsF6Pqdk6g==
+        -----END CERTIFICATE-----
+certificateAuthorities:
+  ca_org1:
+    url: https://ca-org1:7054/
+    httpOptions:
+      verify: false
+    caName: ca-org1
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICITCCAcegAwIBAgIQTxIXVoioxx7BJ37EbMfQNzAKBggqhkjOPQQDAjBbMQsw
+        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+        YW5jaXNjbzENMAsGA1UEChMEb3JnMTEQMA4GA1UEAxMHY2Eub3JnMTAeFw0yMTEx
+        MTEwNzQ4MDBaFw0zMTExMDkwNzQ4MDBaMFsxCzAJBgNVBAYTAlVTMRMwEQYDVQQI
+        EwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMQ0wCwYDVQQKEwRv
+        cmcxMRAwDgYDVQQDEwdjYS5vcmcxMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE
+        v4H1tIdvqD++ICQidqKTqL+vERdileXpII6IUjmTg1Z/Ec9sPwtixCb0R/5sl2cl
+        i4RIumKGHUsZRmRl7i4CxaNtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1UdJQQWMBQG
+        CCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1UdDgQiBCDC
+        +FNO9XptQDhqe6Q56axLJqvATlpypqWlw1RBbpyBrzAKBggqhkjOPQQDAgNIADBF
+        AiBkT1ZXqUzqx18803kwuViVQnoDWhpNnAHXy37E5OYLzAIhAMaH3zQnxNGw5LO3
+        Hvn5YuY1vFSb1CDgS3DwTA9UmCuH
+        -----END CERTIFICATE-----
+        
