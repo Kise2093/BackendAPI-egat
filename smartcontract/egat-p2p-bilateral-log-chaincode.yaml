@@ -34,7 +34,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
-          value: 'bilateral-log_0.0.2:b5fef5ebdf562380a5ca0cf2c03d834d8f70926a8eaf003962b57db3dfeaa9df'
+          value: 'bilateral-log_0.0.3:15b4e057b15369cccbde4c1e6726fe5b2fa6a74c79c9735f3e725c688df405cd'
         - name: CORE_CHAINCODE_ADDRESS
           value: 0.0.0.0:3000
         ports:
