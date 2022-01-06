@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: egat-p2p-web-admin-summary-report-api
+  name: egat-p2p-web-admin-summary-report-api
+spec:
+  ports:
+    - name: "3006"
+      port: 3006
+      targetPort: 3006
+  selector:
+    app: egat-p2p-web-admin-summary-report-api

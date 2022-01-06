@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: egat-p2p-web-admin-summary-report-api
+  name: egat-p2p-web-admin-summary-report-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: egat-p2p-web-admin-summary-report-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        io.kompose.network/egat-p2p: "true"
+        app: egat-p2p-web-admin-summary-report-api
+    spec:
+      containers:
+        - env:
+            - name: APP_DRUID_CLIENT_API
+              value: http://10.40.58.161:32720/druid/v2/sql
+            - name: HOST
+              value: 0.0.0.0
+            - name: KEYCLOAK_OPENID_BASE_URL
+              value: http://keycloak/auth
+            - name: PORT
+              value: "3006"
+          image: phwuts/egat-p2p-web-admin-summary-report-api:0.0.3
+          name: egat-p2p-web-admin-summary-report-api
+          ports:
+            - containerPort: 3006
+          resources: {}
+      restartPolicy: Always
+status: {}
