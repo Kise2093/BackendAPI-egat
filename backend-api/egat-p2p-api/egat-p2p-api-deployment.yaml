@@ -34,7 +34,9 @@ spec:
               value: fb227fe1-f5ca-4c92-ba63-758564915658
             - name: MOBILE_BILATERAL_API_URL
               value: http://egat-p2p-bilateral-api
-          image: phwuts/egat-p2p-api:0.0.7
+            - name: WEB_ADMIN_SUMMARY_REPORT_API_URL
+              value: http://egat-p2p-web-admin-summary-report-api::3006
+          image: phwuts/egat-p2p-api:0.0.8
           name: egat-p2p-api
           resources: {}
       restartPolicy: Always
