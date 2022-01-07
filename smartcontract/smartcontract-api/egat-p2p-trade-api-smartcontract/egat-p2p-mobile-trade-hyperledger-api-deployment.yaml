@@ -14,7 +14,6 @@ spec:
   template:
     metadata:
       labels:
-        io.kompose.network/egat-p2p: "true"
         app: egat-p2p-mobile-trade-hyperledger-api
     spec:
       containers:

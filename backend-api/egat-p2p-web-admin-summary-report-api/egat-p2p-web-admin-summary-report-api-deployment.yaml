@@ -23,7 +23,7 @@ spec:
             - name: HOST
               value: 0.0.0.0
             - name: KEYCLOAK_OPENID_BASE_URL
-              value: http://keycloak/auth
+              value: http://keycloak/auth/realms/egat
             - name: PORT
               value: "3006"
           image: phwuts/egat-p2p-web-admin-summary-report-api:0.0.3

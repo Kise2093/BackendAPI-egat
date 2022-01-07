@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: egat-p2p-web-admin-ref-management-api
+  name: egat-p2p-web-admin-ref-management-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: egat-p2p-web-admin-ref-management-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: egat-p2p-web-admin-ref-management-api
+    spec:
+      containers:
+        - env:
+            - name: BLOCKCHAIN_API_URL
+              value: http://egat-p2p-reference-data-hyperledger-api:5005
+            - name: HOST
+              value: 0.0.0.0
+            - name: KEYCLOAK_OPENID_BASE_URL
+              value: http://keycloak/auth/realms/egat
+            - name: MONGO_INITDB_DATABASENAME
+              value: ReferenceDatabase
+            - name: MONGO_INITDB_HOST
+              value: reference-mongodb
+            - name: MONGO_INITDB_PASSWORD
+              value: Passw0rdEGAT
+            - name: MONGO_INITDB_PORT
+              value: "27017"
+            - name: MONGO_INITDB_USERNAME
+              value: user
+            - name: PORT
+              value: "3005"
+          image: phwuts/egat-p2p-web-admin-ref-management-api:0.0.1
+          name: egat-p2p-web-admin-ref-management-api
+          ports:
+            - containerPort: 3005
+          resources: {}
+      restartPolicy: Always
+status: {}
