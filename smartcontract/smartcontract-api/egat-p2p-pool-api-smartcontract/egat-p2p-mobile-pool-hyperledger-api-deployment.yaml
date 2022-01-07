@@ -45,7 +45,7 @@ spec:
             - mountPath: /shared/
               name: egat-p2p-mobile-pool-hyperledger-api-claim0
             - mountPath: /home/node/store
-              name: keystore
+              name: egat-p2p-mobile-pool-hyperledger-keystore
       restartPolicy: Always
       volumes:
         - name: egat-p2p-mobile-pool-hyperledger-api-claim0
