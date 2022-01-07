@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: egat-p2p-mobile-report-api
+  name: egat-p2p-mobile-report-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: egat-p2p-mobile-report-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: egat-p2p-mobile-report-api
+    spec:
+      containers:
+        - env:
+            - name: BILATERAL_API_ENDPOINT
+              value: http://egat-p2p-bilateral-api:39083
+            - name: FORECAST_API_ENDPOINT
+              value: http://egat-p2p-mobile-forecast-api:39081
+            - name: METER_API_ENDPOINT
+              value: http://egat-p2p-meter-api:4000
+            - name: NODE_ENV
+              value: development
+            - name: POOL_API_ENDPOINT
+              value: http://egat-p2p-mobile-pool-api:39084
+            - name: POWER_API_ENDPOINT
+              value: http://egat-p2p-mobile-power-api:39082/
+            - name: TRADE_API_ENDPOINT
+              value: http://egat-p2p-mobile-trade-api:39085/
+          image: lenkunz/egat-p2p-report:1.0.0-beta-1
+          name: aegat-p2p-mobile-report-api
+          ports:
+            - containerPort: 3000
+            - containerPort: 9229
+          resources: {}
+      restartPolicy: Always
+status: {}

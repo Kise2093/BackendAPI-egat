@@ -29,7 +29,7 @@ spec:
               value: user
             - name: NODE_ENV
               value: development
-          image: lenkunz/egat-p2p-power:1.0.0-beta
+          image: lenkunz/egat-p2p-power:1.0.0-beta-1
           name: egat-p2p-mobile-power-api
           ports:
             - containerPort: 3000

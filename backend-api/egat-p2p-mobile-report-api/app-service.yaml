@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+
+  labels:
+    app: egat-p2p-mobile-report-api
+  name: egat-p2p-mobile-report-api
+spec:
+  ports:
+    - name: "39090"
+      port: 39090
+      targetPort: 3000
+    - name: "39230"
+      port: 39230
+      targetPort: 9229
+  selector:
+    app: egat-p2p-mobile-report-api
+status:
+  loadBalancer: {}

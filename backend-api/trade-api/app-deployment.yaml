@@ -17,8 +17,6 @@ spec:
     spec:
       containers:
         - env:
-            - name: INVOICE_VAT_RATE
-              value: "0.07"
             - name: MONGO_DATABASE
               value: TradeDatabase
             - name: MONGO_HOST
@@ -31,7 +29,7 @@ spec:
               value: user
             - name: NODE_ENV
               value: development
-          image: lenkunz/egat-p2p-trade:1.0.0-beta
+          image: lenkunz/egat-p2p-trade:1.0.0-beta-1
           name: egat-p2p-mobile-trade-api
           ports:
             - containerPort: 3000
