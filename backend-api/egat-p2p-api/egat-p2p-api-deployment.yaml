@@ -33,7 +33,7 @@ spec:
             - name: PASSWORD_AUTH_API
               value: fb227fe1-f5ca-4c92-ba63-758564915658
             - name: MOBILE_BILATERAL_API_URL
-              value: http://egat-p2p-bilateral-api:39083
+              value: http://egat-p2p-mobile-bilateral-api:39083
             - name: WEB_ADMIN_SUMMARY_REPORT_API_URL
               value: http://egat-p2p-web-admin-summary-report-api:3006
             - name: WEB_ADMIN_LOGIN_API_URL
@@ -43,7 +43,7 @@ spec:
             - name: WEB_ADMIN_USER_MANAGEMENT_API_URL
               value: http://egat-p2p-web-admin-user-management-api:3004
             - name: MOBILE_FORECAST_REPORT_API_URL
-              value: http://egat-p2p-mobile-report:39090
+              value: http://egat-p2p-mobile-report-api:39090
           image: phwuts/egat-p2p-api:0.0.11
           name: egat-p2p-api
           resources: {}

@@ -18,7 +18,7 @@ spec:
       containers:
         - env:
             - name: BILATERAL_API_ENDPOINT
-              value: http://egat-p2p-bilateral-api:39083
+              value: http://egat-p2p-mobile-bilateral-api:39083
             - name: FORECAST_API_ENDPOINT
               value: http://egat-p2p-mobile-forecast-api:39081
             - name: METER_API_ENDPOINT
