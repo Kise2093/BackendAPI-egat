@@ -51,7 +51,7 @@ spec:
         - name: egat-p2p-reference-data-hyperledger-api-claim0
           persistentVolumeClaim:
             claimName: share-pvc
-        - name: keystore
+        - name: egat-p2p-reference-data-hyperledger-keystore
           persistentVolumeClaim:
             claimName: egat-p2p-reference-data-hyperledger-keystore
 status: {}
