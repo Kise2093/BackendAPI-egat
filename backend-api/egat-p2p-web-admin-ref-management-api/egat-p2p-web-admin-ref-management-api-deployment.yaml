@@ -26,7 +26,7 @@ spec:
             - name: MONGO_INITDB_DATABASENAME
               value: ReferenceDatabase
             - name: MONGO_INITDB_HOST
-              value: reference-mongodb
+              value: reference-mongodb-0-external
             - name: MONGO_INITDB_PASSWORD
               value: Passw0rdEGAT
             - name: MONGO_INITDB_PORT
