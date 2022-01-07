@@ -39,9 +39,11 @@ spec:
             - name: WEB_ADMIN_LOGIN_API_URL
               value: http://egat-p2p-web-admin-login-api:3003
             - name: WEB_ADMIN_REFERENCE_DATA_API_URL
-              value: http://egat-p2p-reference-data-hyperledger-api-external-svc
-            - name: WEB_ADMIN_USER_MANAGEMENT_API_URL
               value: http://egat-p2p-web-admin-ref-management-api:3005
+            - name: WEB_ADMIN_USER_MANAGEMENT_API_URL
+              value: http://egat-p2p-web-admin-user-management-api:3004
+            - name: MOBILE_FORECAST_REPORT_API_URL
+              value: http://egat-p2p-mobile-report:39087
           image: phwuts/egat-p2p-api:0.0.9
           name: egat-p2p-api
           resources: {}
