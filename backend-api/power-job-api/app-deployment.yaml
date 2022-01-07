@@ -38,7 +38,7 @@ spec:
             - name: POINTNAME_TIME_UTC_OFFSET_MINUTE
               value: "420"
             - name: SRISANGTHAM_ENPOINT_BASE
-              value: http://smarthomedev.egat.co.th
+              value: https://smarthomedev.egat.co.th
             - name: SRISANGTHAM_EP_ENPOINT_BASE
               value: https://ems.energy-pool.eu
             - name: SRISANGTHAM_EP_PASSWORD
@@ -59,7 +59,7 @@ spec:
               value: "http://proxy.egat.co.th:8080/"
             - name: https_proxy
               value: "http://proxy.egat.co.th:8080/"
-          image: lenkunz/egat-p2p-power-job:1.0.0-beta-3
+          image: lenkunz/egat-p2p-power-job:1.0.0-beta-4
           name: egat-p2p-mobile-power-job-api
           ports:
             - containerPort: 3000
