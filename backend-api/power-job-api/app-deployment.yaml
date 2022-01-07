@@ -38,7 +38,7 @@ spec:
             - name: POINTNAME_TIME_UTC_OFFSET_MINUTE
               value: "420"
             - name: SRISANGTHAM_ENPOINT_BASE
-              value: https://smarthomedev.egat.co.th
+              value: http://smarthomedev.egat.co.th
             - name: SRISANGTHAM_EP_ENPOINT_BASE
               value: https://ems.energy-pool.eu
             - name: SRISANGTHAM_EP_PASSWORD
