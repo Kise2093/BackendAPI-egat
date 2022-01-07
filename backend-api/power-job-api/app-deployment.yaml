@@ -48,18 +48,18 @@ spec:
             - name: SRISANGTHAM_TIME_UTC_OFFSET_MINUTE
               value: "420"
             - name: NO_PROXY
-              value: "127.0.0.1,localhost,10.96.0.0/12,10.40.58.0/24,10.40.62.0/24,192.168.0.0/16"
+              value: "127.0.0.1,localhost,10.96.0.0/12,10.40.58.0/24,10.40.62.0/24,192.168.0.0/16,10.40.62.0/24"
             - name: HTTP_PROXY
               value: "http://proxy.egat.co.th:8080/"
             - name: HTTPS_PROXY
               value: "http://proxy.egat.co.th:8080/"
             - name: no_proxy
-              value: "127.0.0.1,localhost,10.96.0.0/12,10.40.58.0/24,10.40.62.0/24,192.168.0.0/16"
+              value: "127.0.0.1,localhost,10.96.0.0/12,10.40.58.0/24,10.40.62.0/24,192.168.0.0/16,10.40.62.0/24"
             - name: http_proxy
               value: "http://proxy.egat.co.th:8080/"
             - name: https_proxy
               value: "http://proxy.egat.co.th:8080/"
-          image: lenkunz/egat-p2p-power-job:1.0.0-beta-1
+          image: lenkunz/egat-p2p-power-job:1.0.0-beta-2
           name: egat-p2p-mobile-power-job-api
           ports:
             - containerPort: 3000

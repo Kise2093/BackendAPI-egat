@@ -44,7 +44,7 @@ spec:
               value: http://egat-p2p-web-admin-user-management-api:3004
             - name: MOBILE_FORECAST_REPORT_API_URL
               value: http://egat-p2p-mobile-report:39090
-          image: phwuts/egat-p2p-api:0.0.9
+          image: phwuts/egat-p2p-api:0.0.11
           name: egat-p2p-api
           resources: {}
       restartPolicy: Always
