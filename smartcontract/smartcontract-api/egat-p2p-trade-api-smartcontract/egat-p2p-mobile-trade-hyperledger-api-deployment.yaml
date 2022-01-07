@@ -51,7 +51,7 @@ spec:
         - name: egat-p2p-mobile-trade-hyperledger-api-claim0
           persistentVolumeClaim:
             claimName: share-pvc
-        - name: keystore
+        - name: egat-p2p-mobile-trade-hyperledger-keystore
           persistentVolumeClaim:
-            claimName: keystore
+            claimName: egat-p2p-mobile-trade-hyperledger-keystore
 status: {}
