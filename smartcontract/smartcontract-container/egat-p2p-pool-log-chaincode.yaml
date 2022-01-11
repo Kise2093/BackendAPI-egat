@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: egat-pool-chaincode-003
-        image: phwuts/egat-p2p-pool-log-chaincode:0.0.3
+        image: phwuts/egat-p2p-pool-log-chaincode:0.0.4
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
