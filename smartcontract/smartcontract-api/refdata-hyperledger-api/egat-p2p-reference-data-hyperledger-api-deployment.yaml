@@ -25,7 +25,7 @@ spec:
             - name: APP_CHAINCODE_EGAT_NAME
               value: egat-refdata
             - name: APP_EGAT_CHANNEL
-              value: egat
+              value: mychannel
             - name: APP_GENERIC_IDENTITY_ID
               value: generic10
             - name: APP_GENERIC_IDENTITY_MSPID
