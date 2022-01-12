@@ -29,7 +29,7 @@ spec:
             - name: APP_GENERIC_IDENTITY_ID
               value: generic10
             - name: APP_GENERIC_IDENTITY_MSPID
-              value: Org1MSP
+              value: org1MSP
             - name: APP_GENERIC_IDENTITY_SECRET
               value: generic10
             - name: HOST
