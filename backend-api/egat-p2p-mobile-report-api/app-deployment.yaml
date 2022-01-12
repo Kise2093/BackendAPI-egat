@@ -32,7 +32,7 @@ spec:
             - name: TRADE_API_ENDPOINT
               value: http://egat-p2p-mobile-trade-api:39085/
           image: lenkunz/egat-p2p-report:1.0.0-beta-1
-          name: aegat-p2p-mobile-report-api
+          name: egat-p2p-mobile-report-api
           ports:
             - containerPort: 3000
             - containerPort: 9229
