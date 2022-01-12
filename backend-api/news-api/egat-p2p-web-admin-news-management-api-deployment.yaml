@@ -20,11 +20,11 @@ spec:
             - name: HOST
               value: 0.0.0.0
             - name: KEYCLOAK_OPENID_BASE_URL
-              value: https://keycloak.iknowplus.co.th/auth/realms/egat
+              value: http://keycloak/auth/realms/egat
             - name: MONGO_INITDB_DATABASENAME
               value: NewsDatabase
             - name: MONGO_INITDB_HOST
-              value: news-mongodb
+              value: news-mongodb-0-external
             - name: MONGO_INITDB_PASSWORD
               value: Passw0rdEGAT
             - name: MONGO_INITDB_PORT
@@ -33,7 +33,7 @@ spec:
               value: user
             - name: PORT
               value: "3007"
-          image: phwuts/egat-p2p-web-admin-news-management-api:0.0.1
+          image: phwuts/egat-p2p-web-admin-news-management-api:0.0.2
           name: egat-p2p-web-admin-news-management-api
           ports:
             - containerPort: 3007
