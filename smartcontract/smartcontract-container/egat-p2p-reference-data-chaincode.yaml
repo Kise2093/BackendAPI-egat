@@ -34,7 +34,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
-          value: 'reference-data-log_0.0.1:0ef1c98cb0d87eedeebfa1f89a02b0e9564bb3d45f6fd945b3d9e593d87125e2'
+          value: 'reference-data-log_0.0.2:ac8d0cb73017c5645c28d09fa2d65596873fd288fd5b6511242013aa05c03371'
         - name: CORE_CHAINCODE_ADDRESS
           value: 0.0.0.0:3000
         ports:
