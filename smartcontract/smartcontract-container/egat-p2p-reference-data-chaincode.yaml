@@ -30,11 +30,11 @@ spec:
     spec:
       containers:
       - name: egat-reference-data-log-chaincode-001
-        image: phwuts/egat-p2p-reference-data-chaincode:0.0.1
+        image: phwuts/egat-p2p-reference-data-log-chaincode:0.0.1
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
-          value: 'reference-data-log_0.0.1:55dc0f92779c5f5a44e98a19afa5bf3615a8c7f6d507635c850f1b5e3e93b1e7'
+          value: 'reference-data-log_0.0.1:0ef1c98cb0d87eedeebfa1f89a02b0e9564bb3d45f6fd945b3d9e593d87125e2'
         - name: CORE_CHAINCODE_ADDRESS
           value: 0.0.0.0:3000
         ports:
