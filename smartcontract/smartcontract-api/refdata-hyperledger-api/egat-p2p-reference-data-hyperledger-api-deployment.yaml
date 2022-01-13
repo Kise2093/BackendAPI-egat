@@ -23,7 +23,7 @@ spec:
             - name: APP_CCPPATH
               value: /shared/blockchain/local-ccp.yaml
             - name: APP_CHAINCODE_EGAT_NAME
-              value: egat-refdata
+              value: reference-data-log
             - name: APP_EGAT_CHANNEL
               value: mychannel
             - name: APP_GENERIC_IDENTITY_ID
