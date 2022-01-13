@@ -46,7 +46,9 @@ spec:
               value: http://egat-p2p-mobile-report-api:39090
             - name: MOBILE_POOL_API_URL
               value: http://egat-p2p-mobile-pool-api:39084
-          image: phwuts/egat-p2p-api:0.0.11
+            - name: WEB_ADMIN_NEWS_MANAGEMENT_API_URL
+              value: http://egat-p2p-web-admin-news-management-api:3007
+          image: phwuts/egat-p2p-api:0.0.12
           name: egat-p2p-api
           resources: {}
       restartPolicy: Always
