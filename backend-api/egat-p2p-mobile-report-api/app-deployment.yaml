@@ -31,7 +31,9 @@ spec:
               value: http://egat-p2p-mobile-power-api:39082/
             - name: TRADE_API_ENDPOINT
               value: http://egat-p2p-mobile-trade-api:39085/
-          image: lenkunz/egat-p2p-report:1.0.0-beta-1
+            - name: REFERENCE_API_ENDPOINT
+              value: http://egat-p2p-web-admin-ref-management-api:3005
+          image: lenkunz/egat-p2p-report:1.1.0-beta
           name: egat-p2p-mobile-report-api
           ports:
             - containerPort: 3000
