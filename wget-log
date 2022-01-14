@@ -1,0 +1,5 @@
+--2022-01-07 16:16:53--  https://smarthomedev.egat.co.th/json/multimeasurement/?product_id=7
+Resolving proxy.egat.co.th (proxy.egat.co.th)... 10.20.220.63, 10.20.220.66, 10.20.220.67, ...
+Connecting to proxy.egat.co.th (proxy.egat.co.th)|10.20.220.63|:8080... connected.
+ERROR: The certificate of ‘smarthomedev.egat.co.th’ is not trusted.
+ERROR: The certificate of ‘smarthomedev.egat.co.th’ hasn't got a known issuer.
