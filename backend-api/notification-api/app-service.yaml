@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: egat-p2p-mobile-notification-api
+  name: egat-p2p-mobile-notification-api
+spec:
+  ports:
+    - name: "39091"
+      port: 39091
+      targetPort: 3000
+    - name: "39231"
+      port: 39231
+      targetPort: 9229
+  selector:
+    app: egat-p2p-mobile-notification-api
+status:
+  loadBalancer: {}
