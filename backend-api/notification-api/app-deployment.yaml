@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: egat-p2p-mobile-notification-api
+  name: egat-p2p-mobile-notification-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: egat-p2p-mobile-notification-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: egat-p2p-mobile-notification-api
+    spec:
+      containers:
+        - env:
+            - name: MONGO_DATABASE
+              value: NotifcationDatabase
+            - name: MONGO_HOST
+              value: notification-mongodb-0-external
+            - name: MONGO_PASSWORD
+              value: Passw0rdEGAT
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_USER
+              value: user
+            - name: NODE_ENV
+              value: development
+          image: lenkunz/egat-p2p-notification:1.1.4-beta
+          name: egat-p2p-mobile-notification-api
+          ports:
+            - containerPort: 3000
+            - containerPort: 9229
+          resources: {}
+      restartPolicy: Always
+status: {}
