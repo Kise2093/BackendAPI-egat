@@ -18,9 +18,9 @@ spec:
       containers:
         - env:
             - name: MONGO_DATABASE
-              value: NotifcationDatabase
+              value: NotificationDatabase
             - name: MONGO_HOST
-              value: notification-mongodb-0-external
+              value: notification-mongodb-headless
             - name: MONGO_PASSWORD
               value: Passw0rdEGAT
             - name: MONGO_PORT
