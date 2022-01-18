@@ -18,37 +18,39 @@ spec:
         - env:
             - name: HOST
               value: 0.0.0.0
-            - name: KEYCLOAK_OPENID_BASE_URL
-              value: http://keycloak/auth/realms/egat
-            - name: MOBILE_LOGIN_API_URL
-              value: http://egat-p2p-mobile-login-api:3001
-            - name: MOBILE_PROFILE_API_URL
-              value: http://egat-p2p-mobile-profile-api:3002
-            - name: MOBILE_REGISTER_API_URL
-              value: http://egat-p2p-mobile-register-api:3000
             - name: PORT
               value: "30000"
             - name: USERNAME_AUTH_API
               value: egat
             - name: PASSWORD_AUTH_API
-              value: fb227fe1-f5ca-4c92-ba63-758564915658
+              value: fb227fe1-f5ca-4c92-ba63-758564915658            
+            - name: KEYCLOAK_OPENID_BASE_URL
+              value: http://keycloak/auth/realms/egat
+            - name: MOBILE_REGISTER_API_URL
+              value: http://egat-p2p-mobile-register-api:3000
+            - name: MOBILE_LOGIN_API_URL
+              value: http://egat-p2p-mobile-login-api:3001
+            - name: MOBILE_PROFILE_API_URL
+              value: http://egat-p2p-mobile-profile-api:3002
             - name: MOBILE_BILATERAL_API_URL
               value: http://egat-p2p-mobile-bilateral-api:39083
-            - name: WEB_ADMIN_SUMMARY_REPORT_API_URL
-              value: http://egat-p2p-web-admin-summary-report-api:3006
-            - name: WEB_ADMIN_LOGIN_API_URL
-              value: http://egat-p2p-web-admin-login-api:3003
-            - name: WEB_ADMIN_REFERENCE_DATA_API_URL
-              value: http://egat-p2p-web-admin-ref-management-api:3005
-            - name: WEB_ADMIN_USER_MANAGEMENT_API_URL
-              value: http://egat-p2p-web-admin-user-management-api:3004
-            - name: MOBILE_FORECAST_REPORT_API_URL
-              value: http://egat-p2p-mobile-report-api:39090
             - name: MOBILE_POOL_API_URL
               value: http://egat-p2p-mobile-pool-api:39084
+            - name: MOBILE_FORECAST_REPORT_API_URL
+              value: http://egat-p2p-mobile-report-api:39090
+            - name: MOBILE_NOTIFICATION_API_URL
+              value: http://egat-p2p-mobile-notification-api:39091
+            - name: WEB_ADMIN_LOGIN_API_URL
+              value: http://egat-p2p-web-admin-login-api:3003
+            - name: WEB_ADMIN_USER_MANAGEMENT_API_URL
+              value: http://egat-p2p-web-admin-user-management-api:3004    
+            - name: WEB_ADMIN_REFERENCE_DATA_API_URL
+              value: http://egat-p2p-web-admin-ref-management-api:3005              
+            - name: WEB_ADMIN_SUMMARY_REPORT_API_URL
+              value: http://egat-p2p-web-admin-summary-report-api:3006
             - name: WEB_ADMIN_NEWS_MANAGEMENT_API_URL
               value: http://egat-p2p-web-admin-news-management-api:3007
-          image: phwuts/egat-p2p-api:0.0.12
+          image: phwuts/egat-p2p-api:0.0.13
           name: egat-p2p-api
           resources: {}
       restartPolicy: Always
