@@ -33,7 +33,7 @@ spec:
               value: user
             - name: PORT
               value: "3007"
-          image: phwuts/egat-p2p-web-admin-news-management-api:0.0.2
+          image: phwuts/egat-p2p-web-admin-news-management-api:0.0.3
           name: egat-p2p-web-admin-news-management-api
           ports:
             - containerPort: 3007

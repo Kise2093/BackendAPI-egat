@@ -46,7 +46,17 @@ spec:
               value: "3004"
             - name: URL_METER_API
               value: http://egat-p2p-meter-api:4000
-          image: phwuts/egat-p2p-web-admin-user-management-api:0.0.2
+            - name: MONGO_INITDB_USER_DB_HOST
+              value: userprofile-mongodb-0-external
+            - name: MONGO_INITDB_USER_DB_PORT
+              value: 27017
+            - name: MONGO_INITDB_USER_DB_DATABASENAME
+              value: UserDatabase
+            - name: MONGO_INITDB_USER_DB_USERNAME
+              value: user
+            - name: MONGO_INITDB_USER_DB_PASSWORD
+              value: Passw0rdEGAT
+          image: phwuts/egat-p2p-web-admin-user-management-api:0.0.3
           name: egat-p2p-web-admin-user-management-api
           ports:
             - containerPort: 3004
