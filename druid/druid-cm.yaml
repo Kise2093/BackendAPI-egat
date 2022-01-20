@@ -13,9 +13,9 @@ data:
   druid_metadata_storage_connector_user: druid
   druid_metadata_storage_type: postgresql
   druid_storage_type: local
-  druid_worker_capacity: "16"
+  druid_worker_capacity: "14"
   druid_zk_service_host: druid-zookeeper-headless:2181
-  druid_processing_numThreads: "16"
+  druid_processing_numThreads: "14"
 kind: ConfigMap
 metadata:
   annotations:
