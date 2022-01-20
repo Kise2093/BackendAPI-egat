@@ -29,7 +29,7 @@ spec:
               value: user
             - name: NODE_ENV
               value: development
-          image: lenkunz/egat-p2p-notification:1.1.4-beta
+          image: lenkunz/egat-p2p-notification:1.6.0-beta
           name: egat-p2p-mobile-notification-api
           ports:
             - containerPort: 3000

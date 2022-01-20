@@ -29,7 +29,7 @@ spec:
               value: user
             - name: NODE_ENV
               value: development
-          image: lenkunz/egat-p2p-trade:1.0.0-beta-1
+          image: lenkunz/egat-p2p-trade:1.6.0-beta
           name: egat-p2p-mobile-trade-api
           ports:
             - containerPort: 3000
