@@ -15,7 +15,7 @@ data:
   druid_storage_type: local
   druid_worker_capacity: "16"
   druid_zk_service_host: druid-zookeeper-headless:2181
-  druid_processing_numThreads: "8"
+  druid_processing_numThreads: "1"
 kind: ConfigMap
 metadata:
   annotations:
