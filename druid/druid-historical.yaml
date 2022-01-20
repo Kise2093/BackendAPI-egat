@@ -42,7 +42,7 @@ spec:
         - name: druid_processing_numMergeBuffers
           value: "2"
         - name: druid_processing_numThreads
-          value: "14"
+          value: "16"
         envFrom:
         - configMapRef:
             name: druid
