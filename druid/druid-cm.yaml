@@ -15,12 +15,12 @@ data:
   druid_storage_type: local
   druid_worker_capacity: "16"
   druid_zk_service_host: druid-zookeeper-headless:2181
+  druid_processing_numThreads: "3"
 kind: ConfigMap
 metadata:
   annotations:
     meta.helm.sh/release-name: druid
     meta.helm.sh/release-namespace: druid
-  creationTimestamp: "2021-12-01T11:09:43Z"
   labels:
     app: druid
     app.kubernetes.io/managed-by: Helm
@@ -29,5 +29,3 @@ metadata:
     release: druid
   name: druid
   namespace: druid
-  resourceVersion: "32363495"
-  uid: d32ce4bd-6cf6-49ad-90b7-bea325de7ebe
