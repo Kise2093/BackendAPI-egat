@@ -46,7 +46,7 @@ spec:
             - name: PORT
               value: "3002"
             - name: URL_METER_API
-              value: http://egat-p2p-mobile-meter-api:4000
+              value: http://egat-p2p-meter-api:4000
           image: phwuts/egat-p2p-mobile-profile-api:0.0.2
           name: egat-p2p-mobile-profile-api
           ports:

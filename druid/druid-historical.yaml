@@ -32,7 +32,7 @@ spec:
         - historical
         env:
         - name: DRUID_MAXDIRECTMEMORYSIZE
-          value: 1g
+          value: 400m
         - name: DRUID_XMS
           value: 512m
         - name: DRUID_XMX
