@@ -37,7 +37,7 @@ spec:
         - name: druid_indexer_fork_property_druid_processing_buffer_sizeBytes
           value: "25000000"
         - name: druid_indexer_runner_javaOptsArray
-          value: '["-server", "-Xms64m", "-Xmx768m", "-XX:MaxDirectMemorySize=512m",
+          value: '["-server", "-Xms64m", "-Xmx2g", "-XX:MaxDirectMemorySize=1g",
             "-Duser.timezone=UTC", "-Dfile.encoding=UTF-8", "-XX:+ExitOnOutOfMemoryError",
             "-Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager"]'
         envFrom:
