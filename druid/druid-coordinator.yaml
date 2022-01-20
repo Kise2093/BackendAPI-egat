@@ -41,7 +41,7 @@ spec:
         - name: DRUID_XMS
           value: 256m
         - name: DRUID_XMX
-          value: 256m
+          value: 2g
         envFrom:
         - configMapRef:
             name: druid
