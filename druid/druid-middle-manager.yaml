@@ -33,7 +33,7 @@ spec:
         - name: DRUID_XMS
           value: 64m
         - name: DRUID_XMX
-          value: 7g
+          value: 16g
         - name: druid_indexer_fork_property_druid_processing_buffer_sizeBytes
           value: "25000000"
         - name: druid_indexer_runner_javaOptsArray
@@ -72,8 +72,8 @@ spec:
           timeoutSeconds: 1
         resources:
           limits:
-            cpu: "4"
-            memory: "8Gi"
+            cpu: "6"
+            memory: "16Gi"
           requests:
             cpu: "4"
             memory: "8Gi"
