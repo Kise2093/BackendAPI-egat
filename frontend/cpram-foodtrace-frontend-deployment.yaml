@@ -17,7 +17,7 @@ spec:
         apps: egat-p2p-webadmin
     spec:
       containers:
-        - image: mrworapol/egat-p2p-webadmin:0.0.1
+        - image: mrworapol/egat-p2p-webadmin:0.0.8
           name: egat-p2p-webadmin
           ports:
             - containerPort: 3004
