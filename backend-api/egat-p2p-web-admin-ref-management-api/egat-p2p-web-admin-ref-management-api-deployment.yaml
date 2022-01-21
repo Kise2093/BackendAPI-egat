@@ -18,7 +18,7 @@ spec:
       containers:
         - env:
             - name: BLOCKCHAIN_API_URL
-              value: http://egat-p2p-reference-data-hyperledger-api:5005
+              value: http://egat-p2p-reference-data-hyperledger-api-external-svc:5005
             - name: HOST
               value: 0.0.0.0
             - name: KEYCLOAK_OPENID_BASE_URL
