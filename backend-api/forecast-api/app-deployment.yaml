@@ -29,7 +29,7 @@ spec:
               value: user
             - name: NODE_ENV
               value: development
-          image: lenkunz/egat-p2p-forecast:1.0.0-beta-1
+          image: lenkunz/egat-p2p-forecast:1.7.0-beta
           name: egat-p2p-mobile-forecast-api
           ports:
             - containerPort: 3000
