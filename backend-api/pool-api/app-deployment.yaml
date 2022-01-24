@@ -35,7 +35,7 @@ spec:
               value: http://egat-p2p-meter-api:4000
             - name: REFERENCE_API_ENDPOINT
               value: http://egat-p2p-web-admin-ref-management-api:3005
-          image: lenkunz/egat-p2p-pool:1.0.0-beta-1
+          image: lenkunz/egat-p2p-pool:1.7.0-beta
           name: egat-p2p-mobile-pool-api
           ports:
             - containerPort: 3000
