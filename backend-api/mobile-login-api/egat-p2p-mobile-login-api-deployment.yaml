@@ -72,7 +72,7 @@ spec:
           ports:
             - containerPort: 3001
           resources:
-            request:
+            requests:
               memory: "64Mi"
             limits: 
               memory: "192Mi"

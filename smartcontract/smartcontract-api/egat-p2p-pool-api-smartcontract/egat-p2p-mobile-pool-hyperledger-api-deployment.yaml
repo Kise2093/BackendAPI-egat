@@ -43,7 +43,7 @@ spec:
           ports:
             - containerPort: 5007
           resources:
-            request:
+            requests:
               memory: "64Mi"
             limits: 
               memory: "192Mi"

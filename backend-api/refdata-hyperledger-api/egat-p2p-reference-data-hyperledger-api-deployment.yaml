@@ -41,7 +41,7 @@ spec:
           ports:
             - containerPort: 5005
           resources:
-            request:
+            requests:
               memory: "128Mi"
             limits: 
               memory: "256Mi"

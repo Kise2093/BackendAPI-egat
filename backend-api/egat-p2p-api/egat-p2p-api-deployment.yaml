@@ -55,7 +55,7 @@ spec:
           image: phwuts/egat-p2p-api:0.0.17
           name: egat-p2p-api
           resources:
-            request:
+            requests:
               memory: "64Mi"
             limits: 
               memory: "192Mi"
