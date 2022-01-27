@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: kafka-client
-  namespace: kafka
+  namespace: kafka-connect
 spec:
   nodeSelector:
     tier: broker
@@ -14,7 +14,7 @@ spec:
       - -c
       - "exec tail -f /dev/null"
     resources:
-      request:
+      requests:
         memory: "64Mi"
       limits: 
         memory: "128Mi"

@@ -43,10 +43,10 @@ spec:
           ports:
           - containerPort: 8083
           resources:
-            request:
+            requests:
               memory: "1664Mi"
             limits: 
-              memory: "1792fMi"
+              memory: "1792Mi"
 ---
 apiVersion: v1
 kind: Service
