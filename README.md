@@ -5,13 +5,21 @@ iknowplus
 
 # backend Deployment 
 
-1. Start from meter-api first
-- Deploy Mongodb by following meterdb-helm-install.txt file
-- Deploy meter-api by running kubectl apply -f egat-p2p-meter-api-deployment.yaml -f egat-p2p-meter-api-service.yaml
-2. register-api
-- kubectl apply -f . (for register-api folder) (might have to change mongo to helm installation)
+1. Start by Deploying Mongodb Databases
+- run bitnami-database.sh shellscript to deploy
+sh backend-api/bitnami-database.sh
 
+2. Deploy all of the APIs and its service
+- run update_application.sh shellscript to deploy the whole api
+sh update_application.sh
+
+# Update backend Deployments
 1. Update deployment to newest version by (will not update svc)
 - git pull 
 - bash deployment_update.sh
+
+# Update backend Service
+1. Update the APIs services
+- git pull
+sh update_svc.sh
 
