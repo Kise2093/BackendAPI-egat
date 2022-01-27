@@ -76,7 +76,7 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         resources:
-            request:
+            requests:
               memory: "576Mi"
             limits: 
               memory: "704Mi"
