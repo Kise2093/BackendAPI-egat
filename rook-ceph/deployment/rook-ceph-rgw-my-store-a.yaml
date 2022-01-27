@@ -1,0 +1,273 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    banzaicloud.com/last-applied: '{"metadata":{"labels":{"app":"rook-ceph-rgw","ceph-version":"16.2.6-0","ceph_daemon_id":"my-store","ceph_daemon_type":"rgw","rgw":"my-store","rook-version":"v1.7.5","rook_cluster":"rook-ceph","rook_object_store":"my-store"},"name":"rook-ceph-rgw-my-store-a","namespace":"rook-ceph","ownerReferences":[{"apiVersion":"ceph.rook.io/v1","blockOwnerDeletion":true,"controller":true,"kind":"CephObjectStore","name":"my-store","uid":"4e8df7e3-2d3e-42da-9c84-63e9affec467"}]},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"rook-ceph-rgw","ceph_daemon_id":"my-store","rgw":"my-store","rook_cluster":"rook-ceph","rook_object_store":"my-store"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"labels":{"app":"rook-ceph-rgw","ceph_daemon_id":"my-store","ceph_daemon_type":"rgw","rgw":"my-store","rook_cluster":"rook-ceph","rook_object_store":"my-store"},"name":"rook-ceph-rgw-my-store-a"},"spec":{"affinity":{"podAntiAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"podAffinityTerm":{"labelSelector":{"matchExpressions":[{"key":"app","operator":"In","values":["rook-ceph-rgw"]}]},"topologyKey":"kubernetes.io/hostname"},"weight":100},{"podAffinityTerm":{"labelSelector":{"matchLabels":{"app":"rook-ceph-rgw","ceph_daemon_id":"my-store","rgw":"my-store","rook_cluster":"rook-ceph","rook_object_store":"my-store"}},"topologyKey":"kubernetes.io/hostname"},"weight":50}]}},"containers":[{"args":["--fsid=6023a4fd-488a-43e9-bc0b-d18d8a5609bb","--keyring=/etc/ceph/keyring-store/keyring","--log-to-stderr=true","--err-to-stderr=true","--mon-cluster-log-to-stderr=true","--log-stderr-prefix=debug
+      ","--default-log-to-file=false","--default-mon-cluster-log-to-file=false","--mon-host=$(ROOK_CEPH_MON_HOST)","--mon-initial-members=$(ROOK_CEPH_MON_INITIAL_MEMBERS)","--id=rgw.my.store.a","--setuser=ceph","--setgroup=ceph","--foreground","--rgw-frontends=beast
+      port=8080","--host=$(POD_NAME)","--rgw-mime-types-file=/etc/ceph/rgw/mime.types","--rgw-realm=my-store","--rgw-zonegroup=my-store","--rgw-zone=my-store"],"command":["radosgw"],"env":[{"name":"CONTAINER_IMAGE","value":"quay.io/ceph/ceph:v16.2.6"},{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}},{"name":"POD_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"NODE_NAME","valueFrom":{"fieldRef":{"fieldPath":"spec.nodeName"}}},{"name":"POD_MEMORY_LIMIT","valueFrom":{"resourceFieldRef":{"divisor":"0","resource":"limits.memory"}}},{"name":"POD_MEMORY_REQUEST","valueFrom":{"resourceFieldRef":{"divisor":"0","resource":"requests.memory"}}},{"name":"POD_CPU_LIMIT","valueFrom":{"resourceFieldRef":{"divisor":"1","resource":"limits.cpu"}}},{"name":"POD_CPU_REQUEST","valueFrom":{"resourceFieldRef":{"divisor":"0","resource":"requests.cpu"}}},{"name":"ROOK_CEPH_MON_HOST","valueFrom":{"secretKeyRef":{"key":"mon_host","name":"rook-ceph-config"}}},{"name":"ROOK_CEPH_MON_INITIAL_MEMBERS","valueFrom":{"secretKeyRef":{"key":"mon_initial_members","name":"rook-ceph-config"}}}],"image":"quay.io/ceph/ceph:v16.2.6","livenessProbe":{"httpGet":{"path":"/swift/healthcheck","port":8080,"scheme":"HTTP"},"initialDelaySeconds":10},"name":"rgw","resources":{},"volumeMounts":[{"mountPath":"/etc/ceph","name":"rook-config-override","readOnly":true},{"mountPath":"/etc/ceph/keyring-store/","name":"rook-ceph-rgw-my-store-a-keyring","readOnly":true},{"mountPath":"/var/log/ceph","name":"rook-ceph-log"},{"mountPath":"/var/lib/ceph/crash","name":"rook-ceph-crash"},{"mountPath":"/var/lib/ceph/rgw/ceph-my-store","name":"ceph-daemon-data"},{"mountPath":"/etc/ceph/rgw","name":"rook-ceph-rgw-my-store-mime-types","readOnly":true}],"workingDir":"/var/log/ceph"}],"initContainers":[{"args":["--verbose","--recursive","ceph:ceph","/var/log/ceph","/var/lib/ceph/crash","/var/lib/ceph/rgw/ceph-my-store"],"command":["chown"],"image":"quay.io/ceph/ceph:v16.2.6","name":"chown-container-data-dir","resources":{},"volumeMounts":[{"mountPath":"/etc/ceph","name":"rook-config-override","readOnly":true},{"mountPath":"/etc/ceph/keyring-store/","name":"rook-ceph-rgw-my-store-a-keyring","readOnly":true},{"mountPath":"/var/log/ceph","name":"rook-ceph-log"},{"mountPath":"/var/lib/ceph/crash","name":"rook-ceph-crash"},{"mountPath":"/var/lib/ceph/rgw/ceph-my-store","name":"ceph-daemon-data"}]}],"restartPolicy":"Always","tolerations":[{"effect":"NoExecute","key":"node.kubernetes.io/unreachable","operator":"Exists","tolerationSeconds":5}],"volumes":[{"name":"rook-config-override","projected":{"sources":[{"configMap":{"items":[{"key":"config","mode":292,"path":"ceph.conf"}],"name":"rook-config-override"}}]}},{"name":"rook-ceph-rgw-my-store-a-keyring","secret":{"secretName":"rook-ceph-rgw-my-store-a-keyring"}},{"hostPath":{"path":"/var/lib/rook/rook-ceph/log"},"name":"rook-ceph-log"},{"hostPath":{"path":"/var/lib/rook/rook-ceph/crash"},"name":"rook-ceph-crash"},{"emptyDir":{},"name":"ceph-daemon-data"},{"configMap":{"name":"rook-ceph-rgw-my-store-mime-types"},"name":"rook-ceph-rgw-my-store-mime-types"}]}}},"status":{}}'
+    deployment.kubernetes.io/revision: "3"
+  creationTimestamp: "2021-09-23T05:00:08Z"
+  generation: 3
+  labels:
+    app: rook-ceph-rgw
+    ceph-version: 16.2.6-0
+    ceph_daemon_id: my-store
+    ceph_daemon_type: rgw
+    rgw: my-store
+    rook-version: v1.7.5
+    rook_cluster: rook-ceph
+    rook_object_store: my-store
+  name: rook-ceph-rgw-my-store-a
+  namespace: rook-ceph
+  ownerReferences:
+  - apiVersion: ceph.rook.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: CephObjectStore
+    name: my-store
+    uid: 4e8df7e3-2d3e-42da-9c84-63e9affec467
+  resourceVersion: "42919907"
+  uid: bcaa2a66-3a16-433f-ae4d-ac600e555722
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: rook-ceph-rgw
+      ceph_daemon_id: my-store
+      rgw: my-store
+      rook_cluster: rook-ceph
+      rook_object_store: my-store
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: rook-ceph-rgw
+        ceph_daemon_id: my-store
+        ceph_daemon_type: rgw
+        rgw: my-store
+        rook_cluster: rook-ceph
+        rook_object_store: my-store
+      name: rook-ceph-rgw-my-store-a
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - rook-ceph-rgw
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: rook-ceph-rgw
+                  ceph_daemon_id: my-store
+                  rgw: my-store
+                  rook_cluster: rook-ceph
+                  rook_object_store: my-store
+              topologyKey: kubernetes.io/hostname
+            weight: 50
+      containers:
+      - args:
+        - --fsid=6023a4fd-488a-43e9-bc0b-d18d8a5609bb
+        - --keyring=/etc/ceph/keyring-store/keyring
+        - --log-to-stderr=true
+        - --err-to-stderr=true
+        - --mon-cluster-log-to-stderr=true
+        - '--log-stderr-prefix=debug '
+        - --default-log-to-file=false
+        - --default-mon-cluster-log-to-file=false
+        - --mon-host=$(ROOK_CEPH_MON_HOST)
+        - --mon-initial-members=$(ROOK_CEPH_MON_INITIAL_MEMBERS)
+        - --id=rgw.my.store.a
+        - --setuser=ceph
+        - --setgroup=ceph
+        - --foreground
+        - --rgw-frontends=beast port=8080
+        - --host=$(POD_NAME)
+        - --rgw-mime-types-file=/etc/ceph/rgw/mime.types
+        - --rgw-realm=my-store
+        - --rgw-zonegroup=my-store
+        - --rgw-zone=my-store
+        command:
+        - radosgw
+        env:
+        - name: CONTAINER_IMAGE
+          value: quay.io/ceph/ceph:v16.2.6
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: POD_MEMORY_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: limits.memory
+        - name: POD_MEMORY_REQUEST
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: requests.memory
+        - name: POD_CPU_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              divisor: "1"
+              resource: limits.cpu
+        - name: POD_CPU_REQUEST
+          valueFrom:
+            resourceFieldRef:
+              divisor: "0"
+              resource: requests.cpu
+        - name: ROOK_CEPH_MON_HOST
+          valueFrom:
+            secretKeyRef:
+              key: mon_host
+              name: rook-ceph-config
+        - name: ROOK_CEPH_MON_INITIAL_MEMBERS
+          valueFrom:
+            secretKeyRef:
+              key: mon_initial_members
+              name: rook-ceph-config
+        image: quay.io/ceph/ceph:v16.2.6
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /swift/healthcheck
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: rgw
+        resources: {}
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/ceph
+          name: rook-config-override
+          readOnly: true
+        - mountPath: /etc/ceph/keyring-store/
+          name: rook-ceph-rgw-my-store-a-keyring
+          readOnly: true
+        - mountPath: /var/log/ceph
+          name: rook-ceph-log
+        - mountPath: /var/lib/ceph/crash
+          name: rook-ceph-crash
+        - mountPath: /var/lib/ceph/rgw/ceph-my-store
+          name: ceph-daemon-data
+        - mountPath: /etc/ceph/rgw
+          name: rook-ceph-rgw-my-store-mime-types
+          readOnly: true
+        workingDir: /var/log/ceph
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - args:
+        - --verbose
+        - --recursive
+        - ceph:ceph
+        - /var/log/ceph
+        - /var/lib/ceph/crash
+        - /var/lib/ceph/rgw/ceph-my-store
+        command:
+        - chown
+        image: quay.io/ceph/ceph:v16.2.6
+        imagePullPolicy: IfNotPresent
+        name: chown-container-data-dir
+        resources: {}
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/ceph
+          name: rook-config-override
+          readOnly: true
+        - mountPath: /etc/ceph/keyring-store/
+          name: rook-ceph-rgw-my-store-a-keyring
+          readOnly: true
+        - mountPath: /var/log/ceph
+          name: rook-ceph-log
+        - mountPath: /var/lib/ceph/crash
+          name: rook-ceph-crash
+        - mountPath: /var/lib/ceph/rgw/ceph-my-store
+          name: ceph-daemon-data
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - effect: NoExecute
+        key: node.kubernetes.io/unreachable
+        operator: Exists
+        tolerationSeconds: 5
+      volumes:
+      - name: rook-config-override
+        projected:
+          defaultMode: 420
+          sources:
+          - configMap:
+              items:
+              - key: config
+                mode: 292
+                path: ceph.conf
+              name: rook-config-override
+      - name: rook-ceph-rgw-my-store-a-keyring
+        secret:
+          defaultMode: 420
+          secretName: rook-ceph-rgw-my-store-a-keyring
+      - hostPath:
+          path: /var/lib/rook/rook-ceph/log
+          type: ""
+        name: rook-ceph-log
+      - hostPath:
+          path: /var/lib/rook/rook-ceph/crash
+          type: ""
+        name: rook-ceph-crash
+      - emptyDir: {}
+        name: ceph-daemon-data
+      - configMap:
+          defaultMode: 420
+          name: rook-ceph-rgw-my-store-mime-types
+        name: rook-ceph-rgw-my-store-mime-types
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2021-09-23T05:00:08Z"
+    lastUpdateTime: "2022-01-06T02:43:48Z"
+    message: ReplicaSet "rook-ceph-rgw-my-store-a-bff5495ff" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2022-01-06T03:51:35Z"
+    lastUpdateTime: "2022-01-06T03:51:35Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 3
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

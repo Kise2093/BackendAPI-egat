@@ -1,0 +1,153 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    meta.helm.sh/release-name: druid
+    meta.helm.sh/release-namespace: druid
+  creationTimestamp: "2021-12-01T11:09:43Z"
+  generation: 1
+  labels:
+    app: zookeeper
+    app.kubernetes.io/managed-by: Helm
+    chart: zookeeper-2.1.4
+    component: server
+    heritage: Helm
+    release: druid
+  name: druid-zookeeper
+  namespace: druid
+  resourceVersion: "48099722"
+  uid: 1e511724-d305-4122-bf2e-497e15d76821
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: zookeeper
+      component: server
+      release: druid
+  serviceName: druid-zookeeper-headless
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: zookeeper
+        component: server
+        release: druid
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - -xec
+        - /config-scripts/run
+        env:
+        - name: ZK_REPLICAS
+          value: "3"
+        - name: JMXAUTH
+          value: "false"
+        - name: JMXDISABLE
+          value: "false"
+        - name: JMXPORT
+          value: "1099"
+        - name: JMXSSL
+          value: "false"
+        - name: ZK_HEAP_SIZE
+          value: 512M
+        - name: ZK_SYNC_LIMIT
+          value: "10"
+        - name: ZK_TICK_TIME
+          value: "2000"
+        - name: ZOO_AUTOPURGE_PURGEINTERVAL
+          value: "0"
+        - name: ZOO_AUTOPURGE_SNAPRETAINCOUNT
+          value: "3"
+        - name: ZOO_INIT_LIMIT
+          value: "5"
+        - name: ZOO_MAX_CLIENT_CNXNS
+          value: "60"
+        - name: ZOO_PORT
+          value: "2181"
+        - name: ZOO_STANDALONE_ENABLED
+          value: "false"
+        - name: ZOO_TICK_TIME
+          value: "2000"
+        image: zookeeper:3.5.5
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - /config-scripts/ok
+          failureThreshold: 2
+          initialDelaySeconds: 20
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: zookeeper
+        ports:
+        - containerPort: 2181
+          name: client
+          protocol: TCP
+        - containerPort: 3888
+          name: election
+          protocol: TCP
+        - containerPort: 2888
+          name: server
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - /config-scripts/ready
+          failureThreshold: 2
+          initialDelaySeconds: 20
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /data
+          name: data
+        - mountPath: /config-scripts
+          name: config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      terminationGracePeriodSeconds: 1800
+      volumes:
+      - configMap:
+          defaultMode: 365
+          name: druid-zookeeper
+        name: config
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      creationTimestamp: null
+      name: data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
+      volumeMode: Filesystem
+    status:
+      phase: Pending
+status:
+  availableReplicas: 3
+  collisionCount: 0
+  currentReplicas: 3
+  currentRevision: druid-zookeeper-57c9ddf477
+  observedGeneration: 1
+  readyReplicas: 3
+  replicas: 3
+  updateRevision: druid-zookeeper-57c9ddf477
+  updatedReplicas: 3

@@ -1,0 +1,147 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kafka
+    meta.helm.sh/release-namespace: kafka-connect
+  creationTimestamp: "2022-01-08T03:52:33Z"
+  generation: 2
+  labels:
+    app.kubernetes.io/component: kafka-broker
+    app.kubernetes.io/instance: kafka
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kafka
+    helm.sh/chart: kafka-0.21.5
+  name: kafka
+  namespace: kafka-connect
+  resourceVersion: "48083571"
+  uid: 827c1b65-69c4-4c52-93f6-4069ec49b12f
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: kafka-broker
+      app.kubernetes.io/instance: kafka
+      app.kubernetes.io/name: kafka
+  serviceName: kafka-headless
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/component: kafka-broker
+        app.kubernetes.io/instance: kafka
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: kafka
+        helm.sh/chart: kafka-0.21.5
+    spec:
+      containers:
+      - command:
+        - sh
+        - -exc
+        - |
+          unset KAFKA_PORT && \
+          export KAFKA_BROKER_ID=${POD_NAME##*-} && \
+          export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${POD_IP}:9092 && \
+          exec /etc/confluent/docker/run
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIP
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: KAFKA_HEAP_OPTS
+          value: -Xmx1G -Xms1G
+        - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+          value: "3"
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: kafka-zookeeper:2181
+        - name: KAFKA_LOG_DIRS
+          value: /opt/kafka/data/logs
+        - name: KAFKA_CONFLUENT_SUPPORT_METRICS_ENABLE
+          value: "false"
+        - name: KAFKA_JMX_PORT
+          value: "5555"
+        image: confluentinc/cp-kafka:5.0.1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -ec
+            - /usr/bin/jps | /bin/grep -q SupportedKafka
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: kafka-broker
+        ports:
+        - containerPort: 9092
+          name: kafka
+          protocol: TCP
+        - containerPort: 31090
+          name: external-0
+          protocol: TCP
+        - containerPort: 31091
+          name: external-1
+          protocol: TCP
+        - containerPort: 31092
+          name: external-2
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: kafka
+          timeoutSeconds: 5
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /opt/kafka/data
+          name: datadir
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 60
+  updateStrategy:
+    type: OnDelete
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      creationTimestamp: null
+      name: datadir
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
+      volumeMode: Filesystem
+    status:
+      phase: Pending
+status:
+  availableReplicas: 3
+  collisionCount: 0
+  currentRevision: kafka-6b7ffc8456
+  observedGeneration: 2
+  readyReplicas: 3
+  replicas: 3
+  updateRevision: kafka-f9df88fd4
+  updatedReplicas: 3

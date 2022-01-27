@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"cli-org1"},"name":"cli-org1","namespace":"hyperledger"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"cli-org1"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"labels":{"app":"cli-org1"}},"spec":{"containers":[{"env":[{"name":"FABRIC_LOGGING_SPEC","value":"DEBUG"},{"name":"CORE_PEER_ADDRESS","value":"peer0-org1:7051"},{"name":"CORE_PEER_ID","value":"cli-org1"},{"name":"CORE_PEER_LOCALMSPID","value":"org1MSP"},{"name":"CORE_PEER_MSPCONFIGPATH","value":"/share/crypto-config/peerOrganizations/org1/users/Admin@org1/msp"},{"name":"CORE_PEER_TLS_CERT_FILE","value":"/share/crypto-config/peerOrganizations/org1/peers/peer0-org1/tls/server.crt"},{"name":"CORE_PEER_TLS_ENABLED","value":"true"},{"name":"CORE_PEER_TLS_KEY_FILE","value":"/share/crypto-config/peerOrganizations/org1/peers/peer0-org1/tls/server.key"},{"name":"CORE_PEER_TLS_ROOTCERT_FILE","value":"/share/crypto-config/peerOrganizations/org1/peers/peer0-org1/tls/ca.crt"},{"name":"GOPATH","value":"/opt/gopath"},{"name":"ORDERER_CA","value":"/share/crypto-config/ordererOrganizations/consortium/orderers/orderer0/msp/tlscacerts/tlsca.consortium-cert.pem"}],"image":"hyperledger/fabric-tools:amd64-2.2.0","name":"cli","tty":true,"volumeMounts":[{"mountPath":"/share","name":"share-persistentdata"}],"workingDir":"/opt/gopath/src/github.com/hyperledger/fabric/peer"}],"restartPolicy":"Always","volumes":[{"name":"share-persistentdata","persistentVolumeClaim":{"claimName":"share-pvc"}}]}}}}
+  creationTimestamp: "2021-11-12T09:11:36Z"
+  generation: 1
+  labels:
+    app: cli-org1
+  name: cli-org1
+  namespace: hyperledger
+  resourceVersion: "47131916"
+  uid: 44f8ba86-e651-4180-af7d-36c35fd650ec
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: cli-org1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: cli-org1
+    spec:
+      containers:
+      - env:
+        - name: FABRIC_LOGGING_SPEC
+          value: DEBUG
+        - name: CORE_PEER_ADDRESS
+          value: peer0-org1:7051
+        - name: CORE_PEER_ID
+          value: cli-org1
+        - name: CORE_PEER_LOCALMSPID
+          value: org1MSP
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: /share/crypto-config/peerOrganizations/org1/users/Admin@org1/msp
+        - name: CORE_PEER_TLS_CERT_FILE
+          value: /share/crypto-config/peerOrganizations/org1/peers/peer0-org1/tls/server.crt
+        - name: CORE_PEER_TLS_ENABLED
+          value: "true"
+        - name: CORE_PEER_TLS_KEY_FILE
+          value: /share/crypto-config/peerOrganizations/org1/peers/peer0-org1/tls/server.key
+        - name: CORE_PEER_TLS_ROOTCERT_FILE
+          value: /share/crypto-config/peerOrganizations/org1/peers/peer0-org1/tls/ca.crt
+        - name: GOPATH
+          value: /opt/gopath
+        - name: ORDERER_CA
+          value: /share/crypto-config/ordererOrganizations/consortium/orderers/orderer0/msp/tlscacerts/tlsca.consortium-cert.pem
+        image: hyperledger/fabric-tools:amd64-2.2.0
+        imagePullPolicy: IfNotPresent
+        name: cli
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+        volumeMounts:
+        - mountPath: /share
+          name: share-persistentdata
+        workingDir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: share-persistentdata
+        persistentVolumeClaim:
+          claimName: share-pvc
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2021-11-12T09:11:36Z"
+    lastUpdateTime: "2021-11-12T09:12:10Z"
+    message: ReplicaSet "cli-org1-547dff5fc6" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2022-01-17T17:42:11Z"
+    lastUpdateTime: "2022-01-17T17:42:11Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

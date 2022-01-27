@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+  creationTimestamp: "2021-09-22T09:07:37Z"
+  generation: 2
+  labels:
+    app: rook-ceph-tools
+  name: rook-ceph-tools
+  namespace: rook-ceph
+  resourceVersion: "42916991"
+  uid: 5c1b38d3-b8ec-45a3-9666-0540de7297cc
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: rook-ceph-tools
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: rook-ceph-tools
+    spec:
+      containers:
+      - args:
+        - -g
+        - --
+        - /usr/local/bin/toolbox.sh
+        command:
+        - /tini
+        env:
+        - name: ROOK_CEPH_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: ceph-username
+              name: rook-ceph-mon
+        - name: ROOK_CEPH_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: ceph-secret
+              name: rook-ceph-mon
+        image: rook/ceph:v1.7.5
+        imagePullPolicy: IfNotPresent
+        name: rook-ceph-tools
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/ceph
+          name: ceph-config
+        - mountPath: /etc/rook
+          name: mon-endpoint-volume
+      dnsPolicy: ClusterFirstWithHostNet
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - effect: NoExecute
+        key: node.kubernetes.io/unreachable
+        operator: Exists
+        tolerationSeconds: 5
+      volumes:
+      - configMap:
+          defaultMode: 420
+          items:
+          - key: data
+            path: mon-endpoints
+          name: rook-ceph-mon-endpoints
+        name: mon-endpoint-volume
+      - emptyDir: {}
+        name: ceph-config
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2021-09-22T09:07:37Z"
+    lastUpdateTime: "2022-01-06T03:01:43Z"
+    message: ReplicaSet "rook-ceph-tools-7869bc54f6" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2022-01-06T03:43:53Z"
+    lastUpdateTime: "2022-01-06T03:43:53Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
