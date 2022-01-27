@@ -15,6 +15,8 @@ spec:
       labels:
         apps: egat-p2p-mobile-bilateral-api
     spec:
+      nodeSelector:
+        tier: api
       containers:
         - env:
             - name: METER_API_ENDPOINT
@@ -39,6 +41,10 @@ spec:
           name: egat-p2p-mobile-bilateral-api
           ports:
             - containerPort: 3000
-          resources: {}
+          resources:
+            request:
+              memory: "64Mi"
+            limits: 
+              memory: "192Mi"
       restartPolicy: Always
 status: {}

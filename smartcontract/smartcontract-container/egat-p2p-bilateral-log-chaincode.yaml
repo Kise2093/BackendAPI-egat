@@ -28,6 +28,8 @@ spec:
       labels:
         app: egat-bilateral-chaincode-003
     spec:
+      nodeSelector:
+        tier: api
       containers:
       - name: egat-bilateral-chaincode-003
         image: phwuts/egat-p2p-bilateral-log-chaincode:0.0.3
@@ -39,5 +41,9 @@ spec:
           value: 0.0.0.0:3000
         ports:
         - containerPort: 3000
-        resources: {}
+        resources:
+            request:
+              memory: "64Mi"
+            limits: 
+              memory: "128Mi"
       dnsPolicy: ClusterFirst

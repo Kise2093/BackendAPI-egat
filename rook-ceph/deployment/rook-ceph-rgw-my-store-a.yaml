@@ -53,6 +53,8 @@ spec:
         rook_object_store: my-store
       name: rook-ceph-rgw-my-store-a
     spec:
+      nodeSelector:
+        tier: ceph
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

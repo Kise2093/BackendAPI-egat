@@ -15,6 +15,8 @@ spec:
       labels:
         apps: egat-p2p-mobile-profile-api
     spec:
+      nodeSelector:
+        tier: api
       containers:
         - env:
             - name: HOST
@@ -51,6 +53,10 @@ spec:
           name: egat-p2p-mobile-profile-api
           ports:
             - containerPort: 3002
-          resources: {}
+          resources:
+            request:
+              memory: "128Mi"
+            limits: 
+              memory: "256Mi"
       restartPolicy: Always
 status: {}

@@ -15,6 +15,8 @@ spec:
       labels:
         apps: egat-p2p-meter-api
     spec:
+      nodeSelector:
+        tier: api
       containers:
         - env:
             - name: APP_API_KEY
@@ -51,5 +53,9 @@ spec:
           name: egat-p2p-meter-api
           ports:
             - containerPort: 4000
-          resources: {}
+          resources:
+            request:
+              memory: "64Mi"
+            limits: 
+              memory: "192Mi"
       restartPolicy: Always

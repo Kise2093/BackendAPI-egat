@@ -27,6 +27,8 @@ spec:
         component: historical
         release: druid
     spec:
+      nodeSelector:
+        tier: ceph
       containers:
       - args:
         - historical
@@ -73,7 +75,11 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        resources: {}
+        resources:
+            request:
+              memory: "576Mi"
+            limits: 
+              memory: "704Mi"
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:

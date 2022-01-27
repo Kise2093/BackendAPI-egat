@@ -37,6 +37,8 @@ spec:
         role: master
       name: druid-postgresql
     spec:
+      nodeSelector:
+        tier: ceph
       containers:
       - env:
         - name: BITNAMI_DEBUG

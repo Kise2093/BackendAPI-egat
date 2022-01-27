@@ -33,6 +33,8 @@ spec:
         app: csi-rbdplugin-provisioner
         contains: csi-rbdplugin-metrics
     spec:
+      nodeSelector:
+        tier: ceph
       affinity:
         nodeAffinity: {}
         podAntiAffinity:

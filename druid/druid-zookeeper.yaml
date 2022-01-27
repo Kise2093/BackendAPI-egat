@@ -35,6 +35,8 @@ spec:
         component: server
         release: druid
     spec:
+      nodeSelector:
+        tier: ceph
       containers:
       - command:
         - /bin/bash

@@ -30,6 +30,8 @@ spec:
       labels:
         app: rook-ceph-operator
     spec:
+      nodeSelector:
+        tier: ceph
       containers:
       - args:
         - ceph

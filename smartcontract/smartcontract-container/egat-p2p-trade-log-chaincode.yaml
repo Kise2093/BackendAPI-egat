@@ -28,6 +28,8 @@ spec:
       labels:
         app: egat-trade-chaincode-002
     spec:
+      nodeSelector:
+        tier: api
       containers:
       - name: egat-trade-chaincode-002
         image: phwuts/egat-p2p-trade-log-chaincode:0.0.4
@@ -39,5 +41,9 @@ spec:
           value: 0.0.0.0:3000
         ports:
         - containerPort: 3000
-        resources: {}
+        resources:
+            request:
+              memory: "64Mi"
+            limits: 
+              memory: "128Mi"
       dnsPolicy: ClusterFirst

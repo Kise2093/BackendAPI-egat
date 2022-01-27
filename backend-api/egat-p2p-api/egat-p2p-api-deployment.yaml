@@ -14,6 +14,8 @@ spec:
       labels:
         apps: egat-p2p-api
     spec:
+      nodeSelector:
+        tier: api
       containers:
         - env:
             - name: HOST
@@ -52,5 +54,9 @@ spec:
               value: http://egat-p2p-web-admin-news-management-api:3007
           image: phwuts/egat-p2p-api:0.0.17
           name: egat-p2p-api
-          resources: {}
+          resources:
+            request:
+              memory: "64Mi"
+            limits: 
+              memory: "192Mi"
       restartPolicy: Always

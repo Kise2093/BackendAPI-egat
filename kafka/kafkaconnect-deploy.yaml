@@ -16,6 +16,8 @@ spec:
       labels:
         app: kafkaconnect
     spec:
+      nodeSelector:
+        tier: broker
       containers:
         - name: kafkaconnect-container
           image: debezium/connect:0.10.0.CR1

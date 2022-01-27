@@ -16,6 +16,8 @@ spec:
       labels:
         apps: egat-p2p-reference-data-hyperledger-api
     spec:
+      nodeSelector:
+        tier: api
       containers:
         - env:
             - name: APP_AFFILIATION
@@ -40,7 +42,11 @@ spec:
           name: egat-p2p-reference-data-hyperledger-api
           ports:
             - containerPort: 5005
-          resources: {}
+          resources:
+            request:
+              memory: "128Mi"
+            limits: 
+              memory: "256Mi"
           volumeMounts:
             - mountPath: /shared/
               name: egat-p2p-reference-data-hyperledger-api-claim0

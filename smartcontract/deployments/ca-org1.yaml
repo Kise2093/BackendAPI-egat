@@ -28,6 +28,8 @@ spec:
       labels:
         app: ca-org1
     spec:
+      nodeSelector:
+        tier: api
       containers:
       - args:
         - sh

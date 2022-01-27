@@ -16,6 +16,8 @@ spec:
         io.kompose.network/egat-p2p: "true"
         app: egat-p2p-web-admin-summary-report-api
     spec:
+      nodeSelector:
+        tier: api
       containers:
         - env:
             - name: APP_DRUID_CLIENT_API
@@ -30,6 +32,10 @@ spec:
           name: egat-p2p-web-admin-summary-report-api
           ports:
             - containerPort: 3006
-          resources: {}
+          resources:
+            request:
+              memory: "64Mi"
+            limits: 
+              memory: "192Mi"
       restartPolicy: Always
 status: {}

@@ -40,6 +40,8 @@ spec:
         component: router
         release: druid
     spec:
+      nodeSelector:
+        tier: ceph
       containers:
       - args:
         - router

@@ -289,7 +289,7 @@ spec:
         - mountPath: /var/lib/ceph/mon/ceph-c
           name: ceph-daemon-data
       nodeSelector:
-        kubernetes.io/hostname: ikp-p2p-worker1
+        kubernetes.io/hostname: ikp-p2p-ceph3
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}

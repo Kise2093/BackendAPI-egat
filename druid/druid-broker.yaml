@@ -40,6 +40,8 @@ spec:
         component: broker
         release: druid
     spec:
+      nodeSelector:
+        tier: ceph
       containers:
       - args:
         - broker

@@ -28,6 +28,8 @@ spec:
       labels:
         app: cli-org1
     spec:
+      nodeSelector:
+        tier: api
       containers:
       - env:
         - name: FABRIC_LOGGING_SPEC

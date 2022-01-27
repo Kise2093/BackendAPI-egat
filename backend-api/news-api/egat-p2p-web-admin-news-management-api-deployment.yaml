@@ -15,6 +15,8 @@ spec:
       labels:
         app: egat-p2p-web-admin-news-management-api
     spec:
+      nodeSelector:
+        tier: api
       containers:
         - env:
             - name: HOST
@@ -37,6 +39,10 @@ spec:
           name: egat-p2p-web-admin-news-management-api
           ports:
             - containerPort: 3007
-          resources: {}
+          resources:
+            request:
+              memory: "64Mi"
+            limits: 
+              memory: "192Mi"
       restartPolicy: Always
 status: {}

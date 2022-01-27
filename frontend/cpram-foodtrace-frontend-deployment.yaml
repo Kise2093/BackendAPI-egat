@@ -16,12 +16,18 @@ spec:
       labels:
         apps: egat-p2p-webadmin
     spec:
+      nodeSelector:
+        tier: api
       containers:
-        - image: mrworapol/egat-p2p-webadmin:0.0.8
+        - image: mrworapol/egat-p2p-webadmin:0.1.1
           name: egat-p2p-webadmin
           ports:
             - containerPort: 3004
-          resources: {}
+          resources:
+            request:
+              memory: "64Mi"
+            limits: 
+              memory: "128Mi"
           stdin: true
           volumeMounts:
             - mountPath: /usr/src/app

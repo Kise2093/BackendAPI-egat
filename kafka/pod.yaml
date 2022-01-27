@@ -4,6 +4,8 @@ metadata:
   name: kafka-client
   namespace: kafka
 spec:
+  nodeSelector:
+    tier: broker
   containers:
   - name: kafka
     image: confluentinc/cp-kafka:5.0.1
@@ -11,4 +13,9 @@ spec:
       - sh
       - -c
       - "exec tail -f /dev/null"
+    resources:
+      request:
+        memory: "64Mi"
+      limits: 
+        memory: "128Mi"
 

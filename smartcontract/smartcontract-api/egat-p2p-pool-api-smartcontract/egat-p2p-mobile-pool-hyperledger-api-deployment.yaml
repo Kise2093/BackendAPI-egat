@@ -16,6 +16,8 @@ spec:
       labels:
         app: egat-p2p-mobile-pool-hyperledger-api
     spec:
+      nodeSelector:
+        tier: api
       containers:
         - env:
             - name: APP_AFFILIATION
@@ -40,7 +42,11 @@ spec:
           name: egat-p2p-mobile-pool-hyperledger-api
           ports:
             - containerPort: 5007
-          resources: {}
+          resources:
+            request:
+              memory: "64Mi"
+            limits: 
+              memory: "192Mi"
           volumeMounts:
             - mountPath: /shared/
               name: egat-p2p-mobile-pool-hyperledger-api-claim0

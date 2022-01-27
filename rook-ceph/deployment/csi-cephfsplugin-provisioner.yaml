@@ -33,6 +33,8 @@ spec:
         app: csi-cephfsplugin-provisioner
         contains: csi-cephfsplugin-metrics
     spec:
+      nodeSelector:
+        tier: ceph
       affinity:
         nodeAffinity: {}
         podAntiAffinity:

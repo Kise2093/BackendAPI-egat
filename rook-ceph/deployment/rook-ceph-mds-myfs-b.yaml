@@ -54,6 +54,8 @@ spec:
       name: rook-ceph-mds-myfs-b
       namespace: rook-ceph
     spec:
+      nodeSelector:
+        tier: ceph
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

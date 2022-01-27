@@ -35,6 +35,8 @@ spec:
         component: server
         release: kafka
     spec:
+      nodeSelector:
+        tier: broker
       containers:
       - command:
         - /bin/bash
