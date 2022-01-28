@@ -23,7 +23,7 @@ spec:
             - name: LENGTH_REFERENCE_OTP
               value: "6"
             - name: MONGO_INITDB_DATABASENAME
-              value: OtpDatabase
+              value: OtpDataDatabase
             - name: MONGO_INITDB_HOST
               value: otp-mongodb-0-external
             - name: MONGO_INITDB_PASSWORD
