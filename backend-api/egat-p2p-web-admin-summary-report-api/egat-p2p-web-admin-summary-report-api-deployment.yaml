@@ -21,7 +21,7 @@ spec:
       containers:
         - env:
             - name: APP_DRUID_CLIENT_API
-              value: http://10.40.58.161:32720/druid/v2/sql
+              value: http://druid-router-external-svc:8888/druid/v2/sql
             - name: HOST
               value: 0.0.0.0
             - name: KEYCLOAK_OPENID_BASE_URL
