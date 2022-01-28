@@ -52,7 +52,7 @@ spec:
               value: http://egat-p2p-web-admin-summary-report-api:3006
             - name: WEB_ADMIN_NEWS_MANAGEMENT_API_URL
               value: http://egat-p2p-web-admin-news-management-api:3007
-          image: phwuts/egat-p2p-api:0.0.17
+          image: phwuts/egat-p2p-api:0.0.18
           name: egat-p2p-api
           resources:
             requests:
