@@ -22,4 +22,19 @@ helm upgrade --install -n erc-p2p energyactual-mongodb bitnami/mongodb --set arc
 
 helm upgrade --install -n erc-p2p notification-mongodb bitnami/mongodb --set architecture=replicaset --set auth.rootPassword=Passw0rdEGAT --set auth.usernames[0]=user --set auth.passwords[0]=Passw0rdEGAT --set auth.databases[0]=NotificationDatabase --set persistence.size=2Gi --set externalAccess.enabled=true --set externalAccess.service.type=NodePort --set externalAccess.service.nodePorts[0]=31133 --set externalAccess.service.nodePorts[1]=31134 --set nodeSelector='tier: db' --set arbiter.nodeSelector='tier: db' --set auth.replicaSetKey=$MONGODB_REPLICA_SET_KEY
 
-helm upgrade --install -n erc-p2p news-mongodb bitnami/mongodb --set architecture=replicaset --set auth.rootPassword=Passw0rdEGAT --set auth.usernames[0]=user --set auth.passwords[0]=Passw0rdEGAT --set auth.databases[0]=NewsDatabase --set persistence.size=2Gi --set externalAccess.enabled=true --set externalAccess.service.type=NodePort --set externalAccess.service.nodePorts[0]=31135 --set externalAccess.service.nodePorts[1]=31136 --set nodeSelector='tier: db' --set arbiter.nodeSelector='tier: db' --version 10.30.0
+helm upgrade --install -n erc-p2p notification-mongodb bitnami/mongodb \
+--set architecture=replicaset --set auth.rootPassword=Passw0rdEGAT \
+--set auth.usernames[0]=user --set auth.passwords[0]=Passw0rdEGAT \
+--set auth.databases[0]=NotificationDatabase --set persistence.size=2Gi \
+--set externalAccess.enabled=true --set externalAccess.service.type=NodePort \
+--set externalAccess.service.nodePorts[0]=31133 --set externalAccess.service.nodePorts[1]=31134 \
+--set nodeSelector='tier: db' --set arbiter.nodeSelector='tier: db' --set auth.replicaSetKey=$MONGODB_REPLICA_SET_KEY
+
+
+helm upgrade --install -n erc-p2p news-mongodb bitnami/mongodb \
+--set architecture=replicaset --set auth.rootPassword=Passw0rdEGAT \
+--set auth.usernames[0]=user --set auth.passwords[0]=Passw0rdEGAT \
+--set auth.databases[0]=NewsDatabase --set persistence.size=2Gi \
+--set externalAccess.enabled=true --set externalAccess.service.type=NodePort \
+--set externalAccess.service.nodePorts[0]=31135 --set externalAccess.service.nodePorts[1]=31136 \
+--set nodeSelector='tier: db' --set arbiter.nodeSelector='tier: db' --version 10.31.4
