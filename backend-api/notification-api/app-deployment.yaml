@@ -22,7 +22,7 @@ spec:
             - name: MONGO_DATABASE
               value: NotificationDatabase
             - name: MONGO_HOST
-              value: notification-mongodb-headless
+              value: notification-mongodb-0-external
             - name: MONGO_PASSWORD
               value: Passw0rdEGAT
             - name: MONGO_PORT
