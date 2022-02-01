@@ -19,7 +19,7 @@ spec:
       nodeSelector:
         tier: api
       containers:
-        - image: mrworapol/egat-p2p-webadmin:0.1.1
+        - image: mrworapol/egat-p2p-webadmin:1.0.0-beta
           name: egat-p2p-webadmin
           ports:
             - containerPort: 3004
