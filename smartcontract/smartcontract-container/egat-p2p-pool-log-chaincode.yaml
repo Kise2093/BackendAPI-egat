@@ -36,7 +36,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
-          value: 'pool-log_0.0.1:ac114e2c491ee9898bd276ef8ac14691eb4c54fcffb01d38154e777ab62ede56'
+          value: 'pool-log_0.0.1:213bb03edcadb26aac6025c4f006e257a0911d8dcdf780c5fdbad1bfd0263d34'
         - name: CORE_CHAINCODE_ADDRESS
           value: 0.0.0.0:3000
         ports:
