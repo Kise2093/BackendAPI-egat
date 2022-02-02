@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: egat-pool-chaincode-003
+  name: egat-pool-chaincode-001
   namespace: hyperledger
 spec:
   ports:
@@ -9,34 +9,34 @@ spec:
     port: 3000
     targetPort: 3000
   selector:
-    app: egat-pool-chaincode-003
+    app: egat-pool-chaincode-001
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: egat-pool-chaincode-003
-  name: egat-pool-chaincode-003
+    app: egat-pool-chaincode-001
+  name: egat-pool-chaincode-001
   namespace: hyperledger
 spec:
   selector:
     matchLabels:
-      app: egat-pool-chaincode-003
+      app: egat-pool-chaincode-001
   template:
     metadata:
       labels:
-        app: egat-pool-chaincode-003
+        app: egat-pool-chaincode-001
     spec:
       nodeSelector:
         tier: api
       containers:
-      - name: egat-pool-chaincode-003
+      - name: egat-pool-chaincode-001
         image: phwuts/egat-p2p-pool-log-chaincode:0.0.4
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
-          value: 'pool-log_0.0.3:ac114e2c491ee9898bd276ef8ac14691eb4c54fcffb01d38154e777ab62ede56'
+          value: 'pool-log_0.0.1:ac114e2c491ee9898bd276ef8ac14691eb4c54fcffb01d38154e777ab62ede56'
         - name: CORE_CHAINCODE_ADDRESS
           value: 0.0.0.0:3000
         ports:

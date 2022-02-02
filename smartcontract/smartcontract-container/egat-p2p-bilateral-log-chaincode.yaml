@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: egat-bilateral-chaincode-003
+  name: egat-bilateral-chaincode-001
   namespace: hyperledger
 spec:
   ports:
@@ -9,34 +9,34 @@ spec:
     port: 3000
     targetPort: 3000
   selector:
-    app: egat-bilateral-chaincode-003
+    app: egat-bilateral-chaincode-001
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: egat-bilateral-chaincode-003
-  name: egat-bilateral-chaincode-003
+    app: egat-bilateral-chaincode-001
+  name: egat-bilateral-chaincode-001
   namespace: hyperledger
 spec:
   selector:
     matchLabels:
-      app: egat-bilateral-chaincode-003
+      app: egat-bilateral-chaincode-001
   template:
     metadata:
       labels:
-        app: egat-bilateral-chaincode-003
+        app: egat-bilateral-chaincode-001
     spec:
       nodeSelector:
         tier: api
       containers:
-      - name: egat-bilateral-chaincode-003
+      - name: egat-bilateral-chaincode-001
         image: phwuts/egat-p2p-bilateral-log-chaincode:0.0.3
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
-          value: 'bilateral-log_0.0.3:15b4e057b15369cccbde4c1e6726fe5b2fa6a74c79c9735f3e725c688df405cd'
+          value: 'bilateral-log_0.0.1:15b4e057b15369cccbde4c1e6726fe5b2fa6a74c79c9735f3e725c688df405cd'
         - name: CORE_CHAINCODE_ADDRESS
           value: 0.0.0.0:3000
         ports:

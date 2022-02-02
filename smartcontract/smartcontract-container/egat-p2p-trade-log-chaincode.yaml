@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: egat-trade-chaincode-003
+  name: egat-trade-chaincode-001
   namespace: hyperledger
 spec:
   ports:
@@ -9,34 +9,34 @@ spec:
     port: 3000
     targetPort: 3000
   selector:
-    app: egat-trade-chaincode-003
+    app: egat-trade-chaincode-001
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: egat-trade-chaincode-003
-  name: egat-trade-chaincode-003
+    app: egat-trade-chaincode-001
+  name: egat-trade-chaincode-001
   namespace: hyperledger
 spec:
   selector:
     matchLabels:
-      app: egat-trade-chaincode-003
+      app: egat-trade-chaincode-001
   template:
     metadata:
       labels:
-        app: egat-trade-chaincode-003
+        app: egat-trade-chaincode-001
     spec:
       nodeSelector:
         tier: api
       containers:
-      - name: egat-trade-chaincode-003
+      - name: egat-trade-chaincode-001
         image: phwuts/egat-p2p-trade-log-chaincode:0.0.5
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
-          value: 'trade-log_0.0.3:64f081f66aea18c3bd5f0a7a3beced42438f38bba636a9e86501f97e8976172c'
+          value: 'trade-log_0.0.1:64f081f66aea18c3bd5f0a7a3beced42438f38bba636a9e86501f97e8976172c'
         - name: CORE_CHAINCODE_ADDRESS
           value: 0.0.0.0:3000
         ports:

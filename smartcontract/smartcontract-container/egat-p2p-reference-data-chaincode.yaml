@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: egat-reference-data-log-chaincode-002
+  name: egat-reference-data-chaincode-001
   namespace: hyperledger
 spec:
   ports:
@@ -9,34 +9,34 @@ spec:
     port: 3000
     targetPort: 3000
   selector:
-    app: egat-reference-data-log-chaincode-002
+    app: egat-reference-data-chaincode-001
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: egat-reference-data-log-chaincode-002
-  name: egat-reference-data-log-chaincode-002
+    app: egat-reference-data-chaincode-001
+  name: egat-reference-data-chaincode-001
   namespace: hyperledger
 spec:
   selector:
     matchLabels:
-      app: egat-reference-data-log-chaincode-002
+      app: egat-reference-data-chaincode-001
   template:
     metadata:
       labels:
-        app: egat-reference-data-log-chaincode-002
+        app: egat-reference-data-chaincode-001
     spec:
       nodeSelector:
         tier: api
       containers:
-      - name: egat-reference-data-log-chaincode-002
-        image: phwuts/egat-p2p-reference-data-log-chaincode:0.0.3
+      - name: egat-reference-data-chaincode-001
+        image: phwuts/egat-p2p-reference-data-chaincode:0.0.3
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
-          value: 'reference-data-log_0.0.2:ac8d0cb73017c5645c28d09fa2d65596873fd288fd5b6511242013aa05c03371'
+          value: 'reference-data-log_0.0.1:ac8d0cb73017c5645c28d09fa2d65596873fd288fd5b6511242013aa05c03371'
         - name: CORE_CHAINCODE_ADDRESS
           value: 0.0.0.0:3000
         ports:
