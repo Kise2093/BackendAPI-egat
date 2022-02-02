@@ -38,7 +38,7 @@ spec:
               value: 0.0.0.0
             - name: PORT
               value: "5008"
-          image: phwuts/egat-p2p-mobile-trade-hyperledger-api:0.0.1
+          image: phwuts/egat-p2p-mobile-trade-hyperledger-api:0.0.2
           name: egat-p2p-mobile-trade-hyperledger-api
           ports:
             - containerPort: 5008
