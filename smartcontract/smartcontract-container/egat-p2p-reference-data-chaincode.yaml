@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: egat-reference-data-chaincode-001
+  name: egat-reference-data-log-chaincode-001
   namespace: hyperledger
 spec:
   ports:
@@ -9,7 +9,7 @@ spec:
     port: 3000
     targetPort: 3000
   selector:
-    app: egat-reference-data-chaincode-001
+    app: egat-reference-data-log-chaincode-001
   type: ClusterIP
 ---
 apiVersion: apps/v1
