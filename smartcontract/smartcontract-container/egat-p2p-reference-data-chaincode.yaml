@@ -16,22 +16,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: egat-reference-data-chaincode-001
-  name: egat-reference-data-chaincode-001
+    app: egat-reference-data-log-chaincode-001
+  name: egat-reference-data-log-chaincode-001
   namespace: hyperledger
 spec:
   selector:
     matchLabels:
-      app: egat-reference-data-chaincode-001
+      app: egat-reference-data-log-chaincode-001
   template:
     metadata:
       labels:
-        app: egat-reference-data-chaincode-001
+        app: egat-reference-data-log-chaincode-001
     spec:
       nodeSelector:
         tier: api
       containers:
-      - name: egat-reference-data-chaincode-001
+      - name: egat-reference-data-log-chaincode-001
         image: phwuts/egat-p2p-reference-data-log-chaincode:0.0.3
         imagePullPolicy: Always
         env:
