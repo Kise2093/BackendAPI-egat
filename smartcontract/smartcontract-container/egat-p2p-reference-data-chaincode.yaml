@@ -32,7 +32,7 @@ spec:
         tier: api
       containers:
       - name: egat-reference-data-chaincode-001
-        image: phwuts/egat-p2p-reference-data-chaincode:0.0.3
+        image: phwuts/egat-p2p-reference-data-log-chaincode:0.0.3
         imagePullPolicy: Always
         env:
         - name: CORE_CHAINCODE_ID
