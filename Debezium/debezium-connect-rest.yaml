@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: debezium-connect
+  name: debezium-connect
+  namespace: kafka-connect
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debezium-connect
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: debezium-connect
+    spec:
+      nodeSelector:
+        tier: broker
+      containers:
+      - image: debezium/connect:nightly
+        imagePullPolicy: Always
+        name: debezium-connect
+        env:
+        - name: GROUP_ID
+          value: "1"
+        - name: CONFIG_STORAGE_TOPIC
+          value: "connect-configs"
+        - name: OFFSET_STORAGE_TOPIC
+          value: "connect-offsets"
+        - name: STATUS_STORAGE_TOPIC
+          value: "connect-status"
+        - name: HOST_NAME
+          value: "debezium-connect"
+        - name: CONNECT_LISTENERS
+          value: "http://0.0.0.0:8083"
+        - name: ADVERTISED_HOST_NAME
+          value: "debezium-connect-svc"
+        - name: BOOTSTRAP_SERVERS
+          value: "kafka-1-svc:9092,kafka-2-svc:9092,kafka-3-svc:9092"
+        - name: HEAP_OPTS
+          value: "-Xms256M -Xmx2G"
+        - name: LOG_LEVEL
+          value: "ERROR"
+        - name: CONNECT_TOPIC_CREATION_ENABLE
+          value: "true"
+        - name: ENABLE_DEBEZIUM_SCRIPTING
+          value: "true"
+        - name: CONNECT_REST_EXTENSION_CLASSES
+          value: "io.debezium.kcrestextension.DebeziumConnectRestExtension"
+        ports:
+        - containerPort: 8083
+        resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: debezium-connect-svc
+  namespace: kafka-connect
+  labels:
+    app: debezium-connect
+spec:
+  type: NodePort
+  ports:
+    - name: kafkaconnect
+      protocol: TCP
+      port: 8083
+      nodePort: 30500
+  selector:
+      app: debezium-connect

@@ -1,0 +1,360 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: kafka-1-data
+  name: kafka-1-data
+  namespace: kafka-connect
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: rook-cephfs
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: kafka-1-logs
+  name: kafka-1-logs
+  namespace: kafka-connect
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: rook-cephfs
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: kafka-1-config
+  name: kafka-1-config
+  namespace: kafka-connect
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: rook-cephfs
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: zookeeper-1-data
+  name: zookeeper-1-data
+  namespace: kafka-connect
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: rook-cephfs
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: zookeeper-1-txns
+  name: zookeeper-1-txns
+  namespace: kafka-connect
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: rook-cephfs
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: zookeeper-1-logs
+  name: zookeeper-1-logs
+  namespace: kafka-connect
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: rook-cephfs
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: zookeeper-1-conf
+  name: zookeeper-1-conf
+  namespace: kafka-connect
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: rook-cephfs
+  volumeMode: Filesystem
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kafka-1
+    component: kafka
+  name: kafka-1
+  namespace: kafka-connect
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-1
+      component: kafka
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: kafka-1
+        component: kafka
+    spec:
+      nodeSelector:
+        tier: broker
+      containers:
+      - image: debezium/kafka:latest
+        imagePullPolicy: Always
+        name: kafka-1
+        env:
+        - name: BROKER_ID
+          value: "1"
+        - name: NODE_ID
+          value: "1"
+        - name: ZOOKEEPER_CONNECT
+          value: "zookeeper-1-svc:2181"
+        - name: KAFKA_INTER_BROKER_LISTENER_NAME
+          value: "PLAINTEXT"
+        - name: KAFKA_CONTROLLER_LISTENER_NAMES
+          value: "CONTROLLER"
+        - name: KAFKA_HEAP_OPTS
+          value: "-Xmx4G -Xms1G"
+        - name: LOG_LEVEL
+          value: "INFO"
+        - name: KAFKA_ADVERTISED_HOST_NAME
+          value: "kafka-1"
+        - name: KAFKA_ADVERTISED_LISTENERS
+          value: "PLAINTEXT://kafka-1-svc:29092,PLAINTEXT_HOST://kafka-1-svc:9092"
+        - name: KAFKA_LISTENERS
+          value: "PLAINTEXT://0.0.0.0:29092,CONTROLLER://0.0.0.0:9093,PLAINTEXT_HOST://0.0.0.0:9092"
+        - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
+          value: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
+        - name: KAFKA_AUTO_CREATE_TOPICS_ENABLE
+          value: "true"
+        - name: KAFKA_LOG_RETENTION_HOURS
+          value: "2"
+        - name: KAFKA_LOG_COMPRESSION_TYPE
+          value: "gzip"
+        - name: KAFKA_CLEANUP_POLICY
+          value: "compact"
+        - name: KAFKA_LOG_DELETE_RETENTION_MS
+          value: "3600000"
+        - name: KAFKA_LOG_RETENTION_BYTES
+          value: "1048576"
+        - name: KAFKA_MAX_MESSAGE_BYTES
+          value: "10485760"
+        ports:
+        - containerPort: 9092
+        - containerPort: 9093
+        resources:
+          requests:
+            memory: "2Gi"
+          limits:
+            memory: "4Gi"
+        volumeMounts:
+        - mountPath: /kafka/data
+          name: kafka-1-data
+        - mountPath: /kafka/logs
+          name: kafka-1-logs
+        - mountPath: /kafka/config
+          name: kafka-1-config
+      volumes:
+      - name: kafka-1-data
+        persistentVolumeClaim:
+          claimName: kafka-1-data
+      - name: kafka-1-logs
+        persistentVolumeClaim:
+          claimName: kafka-1-logs
+      - name: kafka-1-config
+        persistentVolumeClaim:
+          claimName: kafka-1-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: zookeeper-1
+    component: zookeeper
+  name: zookeeper-1
+  namespace: kafka-connect
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zookeeper-1
+      component: zookeeper
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: zookeeper-1
+        component: zookeeper
+    spec:
+      nodeSelector:
+        tier: broker
+      containers:
+      - image: debezium/zookeeper:latest
+        imagePullPolicy: Always
+        name: zookeeper-1
+        env:
+        - name: SERVER_ID
+          value: "1"
+        - name: SERVER_COUNT
+          value: "1"
+        - name: LOG_LEVEL
+          value: "INFO"
+        ports:
+        - containerPort: 2181
+        - containerPort: 2888
+        - containerPort: 3888
+        resources:
+          requests:
+            memory: "2Gi"
+          limits:
+            memory: "4Gi"
+        volumeMounts:
+        - mountPath: /zookeeper/data
+          name: zookeeper-1-data
+        - mountPath: /zookeeper/txns
+          name: zookeeper-1-txns
+        - mountPath: /zookeeper/logs
+          name: zookeeper-1-logs
+        - mountPath: /zookeeper/conf
+          name: zookeeper-1-conf
+      volumes:
+      - name: zookeeper-1-data
+        persistentVolumeClaim:
+          claimName: zookeeper-1-data
+      - name: zookeeper-1-txns
+        persistentVolumeClaim:
+          claimName: zookeeper-1-txns
+      - name: zookeeper-1-logs
+        persistentVolumeClaim:
+          claimName: zookeeper-1-logs
+      - name: zookeeper-1-conf
+        persistentVolumeClaim:
+          claimName: zookeeper-1-conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kafka-1
+  name: kafka-1-svc
+  namespace: kafka-connect
+spec:
+  ports:
+  - name: broker
+    port: 9092
+    protocol: TCP
+    targetPort: 9092
+  - name: quorum
+    port: 9093
+    protocol: TCP
+    targetPort: 9093
+  selector:
+    app: kafka-1
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: zookeeper-1
+  name: zookeeper-1-svc
+  namespace: kafka-connect
+spec:
+  ports:
+  - name: zoo1
+    port: 2181
+    protocol: TCP
+    targetPort: 2181
+  - name: zoo2
+    port: 2888
+    protocol: TCP
+    targetPort: 2888
+  - name: zoo3
+    port: 3888
+    protocol: TCP
+    targetPort: 3888
+  selector:
+    app: zookeeper-1
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kafka
+  name: kafka
+  namespace: kafka-connect
+spec:
+  ports:
+  - name: broker
+    port: 9092
+    protocol: TCP
+    targetPort: 9092
+  - name: quorum
+    port: 9093
+    protocol: TCP
+    targetPort: 9093
+  selector:
+    component: kafka
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: zookeeper
+  name: zookeeper-svc
+  namespace: kafka-connect
+spec:
+  ports:
+  - name: zoo1
+    port: 2181
+    protocol: TCP
+    targetPort: 2181
+  - name: zoo2
+    port: 2888
+    protocol: TCP
+    targetPort: 2888
+  - name: zoo3
+    port: 3888
+    protocol: TCP
+    targetPort: 3888
+  selector:
+    component: zookeeper
+  type: ClusterIP

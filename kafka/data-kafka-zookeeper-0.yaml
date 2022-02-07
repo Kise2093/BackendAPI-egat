@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    pv.kubernetes.io/bind-completed: "yes"
+    pv.kubernetes.io/bound-by-controller: "yes"
+    volume.beta.kubernetes.io/storage-provisioner: rook-ceph.cephfs.csi.ceph.com
+  creationTimestamp: "2022-01-08T03:52:33Z"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  labels:
+    app: zookeeper
+    component: server
+    release: kafka
+  name: data-kafka-zookeeper-0
+  namespace: kafka-connect
+  resourceVersion: "43658859"
+  uid: a02db483-c8e4-47e5-8ea1-0e2d0bcb22b0
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: rook-cephfs
+  volumeMode: Filesystem
+  volumeName: pvc-a02db483-c8e4-47e5-8ea1-0e2d0bcb22b0
+status:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+  phase: Bound

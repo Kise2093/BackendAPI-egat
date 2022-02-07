@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: debezium-ui
+  name: debezium-ui
+  namespace: kafka-connect
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debezium-ui
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: debezium-ui
+    spec:
+      nodeSelector:
+        tier: broker
+      containers:
+      - image: debezium/debezium-ui:latest
+        imagePullPolicy: Always
+        name: debezium-ui
+        env:
+        - name: DEPLOYMENT_MODE
+          value: "default"
+        - name: KAFKA_CONNECT_URIS
+          value: "http://debezium-connect-svc:8083"
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: debezium-ui
+  namespace: kafka-connect
+  labels:
+    app: debezium-ui
+spec:
+  type: NodePort
+  ports:
+    - name: debezium-ui
+      protocol: TCP
+      port: 8080
+      nodePort: 30501
+  selector:
+      app: debezium-ui
