@@ -51,7 +51,7 @@ spec:
               value: user
             - name: MONGO_INITDB_USER_DB_PASSWORD
               value: Passw0rdEGAT
-          image: phwuts/egat-p2p-web-admin-login-api:0.0.3
+          image: phwuts/egat-p2p-web-admin-login-api:0.0.4
           name: egat-p2p-web-admin-login-api
           ports:
             - containerPort: 3003
