@@ -39,7 +39,7 @@ spec:
               value: "3005"
             - name: MOBILE_NOTIFICATION_API_URL
               value: http://egat-p2p-mobile-notification-api:39091
-          image: phwuts/egat-p2p-web-admin-ref-management-api:0.0.7
+          image: phwuts/egat-p2p-web-admin-ref-management-api:0.0.8
           name: egat-p2p-web-admin-ref-management-api
           ports:
             - containerPort: 3005

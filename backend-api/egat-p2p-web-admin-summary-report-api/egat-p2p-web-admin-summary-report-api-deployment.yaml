@@ -28,7 +28,7 @@ spec:
               value: http://keycloak/auth/realms/egat
             - name: PORT
               value: "3006"
-          image: phwuts/egat-p2p-web-admin-summary-report-api:0.0.3
+          image: phwuts/egat-p2p-web-admin-summary-report-api:0.0.4
           name: egat-p2p-web-admin-summary-report-api
           ports:
             - containerPort: 3006

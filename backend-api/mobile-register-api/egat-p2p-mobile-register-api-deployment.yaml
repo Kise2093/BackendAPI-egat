@@ -65,7 +65,7 @@ spec:
               value: http://egat-p2p-meter-api:4000
             - name: URL_OTP_GATEWAY_API
               value: http://egat-p2p-otp-gateway-api:4001
-          image: phwuts/egat-p2p-mobile-register-api:0.0.4
+          image: phwuts/egat-p2p-mobile-register-api:0.0.5
           name: egat-p2p-mobile-register-api
           ports:
             - containerPort: 3000
