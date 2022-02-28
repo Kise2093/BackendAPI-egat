@@ -61,7 +61,7 @@ spec:
               value: "http://proxy.egat.co.th:8080/"
             - name: https_proxy
               value: "http://proxy.egat.co.th:8080/"
-          image: lenkunz/egat-p2p-power-job:1.8.0-beta
+          image: lenkunz/egat-p2p-power-job:1.9.0-beta
           name: egat-p2p-mobile-power-job-api
           ports:
             - containerPort: 3000
