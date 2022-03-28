@@ -45,7 +45,7 @@ spec:
               value: http://egat-p2p-web-admin-ref-management-api:3005
             - name: METER_API_ENDPOINT
               value: http://egat-p2p-meter-api:4000
-          image: lenkunz/egat-p2p-trading-job:1.12.5-beta
+          image: lenkunz/egat-p2p-trading-job:1.12.6-beta
           name: egat-p2p-mobile-trading-job-api
           ports:
             - containerPort: 3000
