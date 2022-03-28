@@ -31,7 +31,9 @@ spec:
               value: user
             - name: NODE_ENV
               value: development
-          image: lenkunz/egat-p2p-trade:1.9.0-beta
+            - name: TRADE_BLOCKCHAIN_API_ENDPOINT
+              value: http://egat-p2p-mobile-trade-hyperledger-api-external-svc:5008
+          image: lenkunz/egat-p2p-trade:1.12.0-beta
           name: egat-p2p-mobile-trade-api
           ports:
             - containerPort: 3000
