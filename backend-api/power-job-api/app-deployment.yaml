@@ -44,7 +44,7 @@ spec:
             - name: SRISANGTHAM_EP_ENPOINT_BASE
               value: https://ems.energy-pool.eu
             - name: SRISANGTHAM_EP_PASSWORD
-              value: !98gL2Ej;K6vV/g:
+              value: "!98gL2Ej;K6vV/g:"
             - name: SRISANGTHAM_EP_USERNAME
               value: a.limsupanark@egat
             - name: SRISANGTHAM_TIME_UTC_OFFSET_MINUTE
